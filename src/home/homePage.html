@@ -1,129 +1,129 @@
-<div class="create-container1" style="overflow: auto;">
-    <div class="nav-bar1">
-        <div>
-            <div class="first-nav-div1"></div>
-        </div>
-        <div class="centered-div1">
-            <div class="parent-kanban1" title="Kanban">
-                <div class="navimage-kanban1"></div>
-            </div>
-            <div class="parent-scheduler1" title="Scheduler">
-                <div class="navimage-scheduler1"></div>
-            </div>
-            <div class="parent-gantt1" title="Gantt">
-                <div class="navimage-gantt1"></div>
-            </div>
-            <div class="parent-grid1" title="Grid">
-                <div class="navimage-grid1"></div>
-            </div>
-        </div>
-        <div>
-            <div class="last-nav-div1"></div>
-        </div>
-    </div>
-    <div class="main-content1">
-        <div class="title-container1">
-            <div class="extra-circle1"></div> <!-- Add extra circle for mobile view -->
-            <div class="title1">Sprint Management</div>
-            <button class="button1"></button>
-            <div class="circle1"></div> <!-- Add circle for mobile view -->
-        </div>
-        <div class="check-udhaya">
-            <div class="card-container1">
-                <div class="inner-cadr">
-                    <div class="mainimagetodo">
+<div class="viewport-div" style="width: 100vw; height: 100vh; overflow: hidden;background-color: #f8f9fa;">
+<div class="heading">Sprint Management</div>
+<button type="button" id="imageWithButton"  class="button-with-image"></button>
+<div style="position: absolute; width: 70%;left: 115px; top: 90px; z-index: 1000;">
+    <div class="row">
+        <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 card-container">
+            <div class="card1">
+                <div class="card-body income-card">
+                    <div class="card-block">
+                        <div class="media">
+                            <div class="media-body text-xs-left float-right">
+                                <div class="mainimagetodo">
+                                    <div class="smallimagetodo"></div>
+                                </div>
+                                <div class="detailcontainertodo">
+                                    <div class="texttodo">TO DO</div>
+                                    <div class="counttodo">0</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="detailcontainertodo">
-                        <div class="texttodo">TO DO</div>
-                        <div class="counttodo">0</div>
-                    </div>
-                </div>
-                <div class="inner-cadr">
-                    <div class="mainimageprogress">
-                    </div>
-                    <div class="detailcontainertodo">
-                        <div class="texttodo">InProgress</div>
-                        <div class="counttodo">0</div>
-                    </div>
-                </div>
-                <div class="inner-cadr">
-                    <div class="mainimagetest">
-                    </div>
-                    <div class="detailcontainertodo">
-                        <div class="texttodo">Testing</div>
-                        <div class="counttodo">0</div>
-                    </div>
-                </div>
-                <div class="inner-cadr">
-                    <div class="mainimagedone">
-                    </div>
-                    <div class="detailcontainertodo">
-                        <div class="texttodo">Done</div>
-                        <div class="counttodo">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="dropdown-container1">
-                <div id="datasourceDropDown" class="custom-dropdown1">
-                </div>
-                <div id="image-container" class="custom-dropdown1">
-                    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Martin%20Tamer.png" alt="Martin Tamer"
-                        class="circular-image1" title="Martin Tamer" style="width: 35px; height: 35px;">
-                    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Rose%20Fuller.png" alt="Rose Fuller"
-                        class="circular-image1" title="Rose Fuller" style="width: 35px; height: 35px;">
-                    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Margaret%20Buchanan.png"
-                        alt="Margaret Buchanan" class="circular-image1" title="Margaret Buchanan"
-                        style="width: 35px; height: 35px;">
-                    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Fuller%20King.png" alt="Fuller King"
-                        class="circular-image1" title="Fuller King" style="width: 35px; height: 35px;">
-                    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Davolio%20Fuller.png"
-                        alt="Davolio Fuller" class="circular-image1" title="Davolio Fuller"
-                        style="width: 35px; height: 35px;">
-                </div>
-                <div id="timerangecompo" class="custom-dropdown1">
-                    <input type="text" id="timerangecompo1">
                 </div>
             </div>
         </div>
-        <div class="container-udhaya">
-            <div id="component-renderf" class="component-container1">
-
+        <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 card-container">
+            <div class="card2">
+                <div class="card-body expense-card">
+                    <div class="card-block">
+                        <div class="media">
+                            <div class="media-body text-xs-left float-right">
+                                <div class="mainimageprogress">
+                                    <div class="smallimageprogress"></div>
+                                </div>
+                                <div class="detailcontainertodo">
+                                    <div class="texttodo">InProgress</div>
+                                    <div class="counttodo">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="component-render-scheduler" class="component-container1">
-
+        </div>
+        <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 card-container">
+            <div class="card3">
+                <div class="card-body balance">
+                    <div class="card-block">
+                        <div class="media">
+                            <div class="media-body text-xs-left float-right">
+                                <div class="mainimagetest">
+                                    <div class="smallimagetest"></div>
+                                </div>
+                                <div class="detailcontainertodo">
+                                    <div class="texttodo">Testing</div>
+                                    <div class="counttodo">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="component-render-gantt" class="component-container1">
-            </div>
-            <div id="component-render-grid" class="component-container1">
-
+        </div>
+        <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 card-container">
+            <div class="card4">
+                <div class="card-body transaction">
+                    <div class="card-block">
+                        <div class="media">
+                            <div class="media-body text-xs-left float-right">
+                                <div class="mainimagedone">
+                                    <div class="smallimagedone"></div>
+                                </div>
+                                <div class="detailcontainertodo">
+                                    <div class="texttodo">Done</div>
+                                    <div class="counttodo">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Mobile View Navigation Bar -->
-<div class="mobile-nav-bar1">
-    <div class="parent-kanban1">
-        <div class="navimage-kanban1"></div>
-    </div>
-    <div class="parent-scheduler1">
-        <div class="navimage-scheduler1"></div>
-    </div>
-    <div class="parent-gantt1">
-        <div class="navimage-gantt1"></div>
-    </div>
-    <div class="parent-grid1">
-        <div class="navimage-grid1"></div>
-    </div>
+<div>
+        <div class="datasourceDropDownParent">
+            <h4>Project</h4>
+            <input type="text" id="datasourceDropDown">
+        </div>
+        <div class="image-container">
+            <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Martin%20Tamer.png" alt="Martin Tamer" class="circular-image">
+            <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Rose%20Fuller.png" alt="Rose Fuller" class="circular-image">
+            <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Margaret%20Buchanan.png" alt="Margaret Buchanan" class="circular-image">
+            <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Fuller%20King.png" alt="Fuller King" class="circular-image">
+            <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Davolio%20Fuller.png" alt="Davolio Fuller" class="circular-image">
+        </div>
+        <div class="timerangecompoParent">
+            <h4 class="dateRangeText">Date Range</h4>
+            <input type="text" id="timerangecompo">
+        </div>
 </div>
 
-<!-- New div for mobile view -->
-<div class="custom-div1"></div>
-
-<!--Script and template-->
-<!---->
-    <!----> 
-         <!---->
+<!-- <div class="image-container">
+    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Martin%20Tamer.png" alt="Martin Tamer" class="circular-image">
+    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Rose%20Fuller.png" alt="Rose Fuller" class="circular-image">
+    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Margaret%20Buchanan.png" alt="Margaret Buchanan" class="circular-image">
+    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Fuller%20King.png" alt="Fuller King" class="circular-image">
+    <img src="https://ej2.syncfusion.com/demos/src/gantt/images/Davolio%20Fuller.png" alt="Davolio Fuller" class="circular-image">
+</div> -->
+<div id="paymentGraph" class="component-content"></div>
+<!-- <div class="content"> -->
+    <div style="display: none">
+        <div id="Kanban"></div>
+    </div>
+    <div style="display: none">
+        <div id="Scheduler"></div>
+    </div>
+    <div style="display: none">
+        <div id="Gantt" style="margin-left: 30px; margin-right: 30px;"></div>
+    </div>
+    <div style="display: none">
+        <div id="Grid"></div>
+    </div>
+</div>
+<!-- </div> -->
+<!-- </div> -->
+<!-- kanban header tempalte -->
 <script id="headerTemplate" type="text/x-jsrender">
     <div class="header-template-wrap">
         <div class="header-icon e-icons ${keyField}"></div>
@@ -151,6 +151,199 @@
 <script id="captiontemplate" type="text/x-template">
     ${key}
 </script>
+
+<style type="text/css">
+    .image-container {
+      position: absolute;
+      z-index: 30;
+      margin: 0 auto;
+      padding-top: 50px;
+      top: 228px;
+    }
+    .circular-image {
+      width: 45px; 
+      height: 45px;
+      border-radius: 50%; 
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+    }
+    .circular-image:nth-child(1) { left: 0; }
+    .circular-image:nth-child(2) { left: 35px; }
+    .circular-image:nth-child(3) { left: 75px; }
+    .circular-image:nth-child(4) { left: 115px; }
+    .circular-image:nth-child(5) { left: 155px; }
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      /* height: 100%; */
+    }
+
+    .main-container {
+      height: 100vh; /* Set height to 100% of viewport height */
+      overflow: hidden; /* Hide scrollbars */
+      padding-top: 20px; /* Additional padding */
+    }
+    
+    .e-kanban .header-template-wrap {
+        display: inline-flex;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .e-kanban .header-template-wrap .header-icon {
+        font-family: 'Kanban priority icons';
+        margin-top: 3px;
+        width: 10%;
+    }
+
+    .e-kanban .header-template-wrap .header-text {
+        margin-left: 15px;
+    }
+
+    .e-kanban.e-rtl .header-template-wrap .header-text {
+        margin-right: 15px;
+    }
+
+    .e-kanban.e-rtl .e-card-avatar {
+        left: 12px;
+        right: auto;
+    }
+
+    .e-kanban .e-card-avatar {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        background:  gainsboro;
+        color: #6b6b6b;
+        border-radius: 50%;
+        position: absolute;
+        right: 12px;
+        bottom: 10px;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 10px 0px 0px 1px;
+    }
+
+    .e-kanban .Open::before {
+        content: '\e700';
+        color: #0251cc;
+        font-size: 16px;
+    }
+
+    .e-kanban .InProgress::before {
+        content: '\e703';
+        color: #ea9713;
+        font-size: 16px;
+    }
+
+    .e-kanban .e-image img {
+        background: #ececec;
+        border: 1px solid #c8c8c8;
+        border-radius: 50%;
+    }
+
+    .e-kanban .Testing::before {
+        content: '\e701';
+        color: #8e4399;
+        font-size: 16px;
+    }
+
+    .e-kanban .Close::before {
+        content: '\e702';
+        color: #63ba3c;
+        font-size: 16px;
+    }
+
+    .e-kanban .e-card .e-card-tag-field {
+        background: #ececec;
+        color: #6b6b6b;
+        margin-right: 5px;
+        line-height: 1.1;
+        font-size: 13px;
+        border-radius: 3px;
+        padding: 4px;
+    }
+
+    .e-kanban .e-card-custom-footer {
+        display: flex;
+        padding: 0px 12px 12px;
+        line-height: 1;
+        height: 35px;
+    }
+
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Low.e-selection:hover,
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Low,
+    .e-kanban.e-rtl .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Low {
+        border-left: 3px solid #1F88E5;
+    }
+
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.High.e-selection:hover,
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.High,
+    .e-kanban.e-rtl .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.High {
+        border-left: 3px solid #673AB8;
+    }
+
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Normal.e-selection:hover,
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Normal,
+    .e-kanban.e-rtl .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Normal {
+        border-left: 3px solid #02897B;
+    }
+
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Critical.e-selection:hover,
+    .e-kanban .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Critical,
+    .e-kanban.e-rtl .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card.Critical {
+        border-left: 3px solid #E64A19;
+    }
+
+    .e-kanban.e-rtl .e-kanban-content .e-content-row .e-content-cells .e-card-wrapper .e-card {
+        border-left: none;
+    }
+    .fluent-dark .e-kanban .e-card .e-card-tag-field,
+    .bootstrap5-dark .e-kanban .e-card .e-card-tag-field,
+    .tailwind-dark .e-kanban .e-card .e-card-tag-field,
+    .material-dark .e-kanban .e-card .e-card-tag-field,
+    .fabric-dark .e-kanban .e-card .e-card-tag-field,
+    .bootstrap-dark .e-kanban .e-card .e-card-tag-field,
+    .highcontrast .e-kanban .e-card .e-card-tag-field {
+        background: #4b5563;
+        color: #fff;
+    }
+    .fluent-dark .e-kanban .e-card-avatar,
+    .bootstrap5-dark .e-kanban .e-card-avatar,
+    .tailwind-dark .e-kanban .e-card-avatar,
+    .material-dark .e-kanban .e-card-avatar,
+    .fabric-dark .e-kanban .e-card-avatar,
+    .bootstrap-dark .e-kanban .e-card-avatar,
+    .highcontrast .e-kanban .e-card-avatar {
+        background: #4b5563;
+        color: #fff;
+    }
+
+    @font-face {
+        font-family: 'Kanban priority icons';
+        src:
+            url(data:application/x-font-ttf;charset=utf-8;base64,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) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    [class^="sf-icon-"],
+    [class*=" sf-icon-"] {
+        font-family: 'Kanban priority icons' !important;
+        speak: none;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+
 <!-- Gantt column template  -->
 <script type="text/x-template" id="columnTemplate">
     ${getGanttResourceImage(data)}

@@ -35,7 +35,9 @@ crossroads.addRoute('/{val}', () => {
     let pageObj: { [key: string]: Object } = getPageObj(window.location.hash.replace('#/', ''));
     let ajaxHTML: Ajax = new Ajax('./' + pageObj.page + '.html', 'GET', true);
     ajaxHTML.send().then((value: Object): void => {
-        document.body.innerHTML = value.toString();
+        if (document.getElementById('content-area')) {
+            (document.getElementById('content-area') as HTMLElement).innerHTML = value.toString();
+        }
         if (window.location.hash.replace('#/', '') === 'home') {
             window.home();
         } else {

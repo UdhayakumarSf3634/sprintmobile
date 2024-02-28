@@ -699,7 +699,6 @@ function updateCommonDataAndRefreshComponents(commonData: any) {
   }
   if (scheduleObj) {
     scheduleObj.eventSettings.dataSource = commonData;
-    scheduleObj.resources[1].dataSource = commonData
   }
   if (gantt) {
     gantt.dataSource = commonData;
@@ -710,27 +709,27 @@ function updateCommonDataAndRefreshComponents(commonData: any) {
   setTimeout(() => {
     if (kanbanObj) {
       kanbanObj.refresh();
-      // setTimeout(() => {
-      //   adjustKanbanHeight();
-      // }, 0);
+      setTimeout(() => {
+        adjustKanbanHeight();
+      }, 0);
     }
     if (scheduleObj) {
       scheduleObj.refresh();
-      // setTimeout(() => {
-      //   adjustSchedulerHeight();
-      // }, 0);
+      setTimeout(() => {
+        adjustSchedulerHeight();
+      }, 0);
     }
     if (gantt) {
       gantt.refresh();
-      // setTimeout(() => {
-      //   adjustGanttHeight();
-      // }, 0);
+      setTimeout(() => {
+        adjustGanttHeight();
+      }, 0);
     }
     if (gridObj) {
       gridObj.refresh();
-      // setTimeout(() => {
-      //   adjustGridHeight();
-      // }, 0);
+      setTimeout(() => {
+        adjustGridHeight();
+      }, 0);
     }
   }, 0);
   setTimeout(() => {
@@ -769,21 +768,20 @@ function renderDataSourceDropDown(): void {
     ],
     fields: fields,
     change: function (args) {
+      
       const selectedProject = args.itemData[fields.value].toString();
+
       switch (selectedProject) {
         case 'Project1':
           filterAndUpdateData(window.sprintData1);
-          scheduleObj.selectedDate = new Date(window.sprintData1[0].StartTime);
           break;
 
         case 'Project2':
           filterAndUpdateData(window.sprintData2);
-          scheduleObj.selectedDate = new Date(window.sprintData2[0].StartTime);
           break;
 
         case 'Project3':
           filterAndUpdateData(window.sprintData3);
-          scheduleObj.selectedDate = new Date(window.sprintData3[0].StartTime);
           break;
       }
     },
@@ -799,7 +797,9 @@ function idExistsInArray(id: any, array: any[]) {
   return array.some(obj => obj.Id === id);
 }
 function renderButton(): void {
-  document.getElementsByClassName('button1')[0]?.addEventListener('click', () => {
+  document.getElementById('imageWithButton')?.addEventListener('click', () => {
+    
+
     const projectValue = topDropDownInstance.value as string;
     const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
     
@@ -816,24 +816,8 @@ function renderButton(): void {
     } while (idExistsInArray(newId, projectData));
 
     data.Id = newId;
-    let indexValue:any;
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div1');
-    if (centeredDiv) {
-      let elements: any = centeredDiv.querySelectorAll('div');
-      let parentDiv:any =[];
-      elements.forEach(function(element:any) {
-        if (element.className.includes("parent")) {
-          parentDiv.push(element)
-        }
-      })
-      elements = parentDiv
-      elements.forEach(function (element: HTMLDivElement, index: number) {
-        if (element.classList.contains('show1-background')) {
-          indexValue = index
-        }
-      });
-    }
-    switch (indexValue) {
+
+    switch (parseInt(tabObj['selectingID'])) {
       case 0:
         kanbanObj.openDialog("Add",data)
       //  kanbanObj.addCard(data);
@@ -860,62 +844,6 @@ function renderButton(): void {
         break;
     }
   });
-  document.getElementsByClassName('custom-div1')[0]?.addEventListener('click', () => {
-    const projectValue = topDropDownInstance.value as string;
-    const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
-    if (!projectData || projectData.length === 0) {
-      return;
-    }
-    const data = { ...projectData[0] };
-    let newId = projectData.length;
-    do {
-      newId++;
-    } while (idExistsInArray(newId, projectData));
-    data.Id = newId;
-    let indexValue:any;
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar1');
-    if (centeredDiv) {
-      let elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
-      let parentDiv:any =[];
-      elements.forEach(function(element:any) {
-        if (element.className.includes("parent")) {
-          parentDiv.push(element)
-        }
-      })
-      elements = parentDiv
-      elements.forEach(function (element: HTMLDivElement, index: number) {
-        if (element.classList.contains('show1-background')) {
-          indexValue = index
-        }
-      });
-    }
-    switch (indexValue) {
-      case 0:
-        kanbanObj.openDialog("Add",data)
-      //  kanbanObj.addCard(data);
-        break;
-      case 1:
-        scheduleObj.openEditor(data,"Add")
-        var resource = { ...data.resources[0] }
-        // scheduleObj.addEvent(data)
-        // setTimeout(() => {
-        //   debugger
-        //   scheduleObj.eventsData[scheduleObj.eventsData.length-1].resources[0] = resource
-        //   const projectValue = topDropDownInstance.value as string;
-        //   const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
-        //   projectData[projectData.length-1].resources[0] = resource
-        // })
-        break;
-      case 2:
-        gantt.openAddDialog();
-        break;
-      case 3:
-        gridObj.editSettings.mode = "Dialog"
-        gridObj.editModule.addRecord();
-      //  gridObj.addRecord(data);
-        break;
-    }
-  })
 }
 function resourceFilterImage(value: any): void {
   const projectValue = topDropDownInstance.value;
@@ -972,7 +900,7 @@ function timerangecompo(): void {
     startDate: new Date(2019, 0, 1),
     endDate: new Date(2023, 0, 1),
   });
-  dateRangeInstance.appendTo("#timerangecompo1")
+  dateRangeInstance.appendTo("#timerangecompo")
 }
 function renderVisalComponents(): void {
   tabObj = new Tab({
@@ -1124,17 +1052,6 @@ function renderGrid(): void {
   let status: any;
   let resource: any;
   let resourceObj: any;
-  let customFn: (args: { [key: string]: string }) => any = (args: { [key: string]: string }) => {
-    let value:number = parseInt(args['value'])
-    const gridStatusElement:any = document.getElementById('component-render-gridStatus');
-    if (gridStatusElement.ej2_instances[0]) {
-      if (gridStatusElement.ej2_instances[0].value == 'Close' && value < 100) {
-        return false
-      } else {
-        return true
-      }
-    }
-  };
   gridObj = new Grid({
     dataSource: window.commonData,
     allowGrouping: true,
@@ -1144,14 +1061,7 @@ function renderGrid(): void {
       { field: 'Subject', width: '350px' },
       { field: 'StartTime', editType: 'datetimepickeredit',valueAccessor:startdateValueAccessor},
       { field: 'EndTime', editType: 'datetimepickeredit',valueAccessor:enddateValueAccessor },
-      {
-        field: 'Progress', editType: 'numericedit', edit: {
-          params: {
-            min: 0,
-            max: 100
-          }
-        }, validationRules: { required: true,minLength: [customFn, 'Progress Cant be less than 100 if the status is in close']}
-      },
+      { field: 'Progress', editType: 'numericedit' },
       {
         field: 'Status',
         edit: {
@@ -1227,7 +1137,7 @@ function renderGrid(): void {
             );
 
             if (matchingResource) {
-              return matchingResource.resourceName; // Return the matching object as an array
+              return [matchingResource]; // Return the matching object as an array
             }
 
             return null; // Return null if no matching object is found
@@ -1238,6 +1148,7 @@ function renderGrid(): void {
           write: (args: any) => {
             let valueToSet = args.rowData && args.rowData[args.column.field] ? args.rowData[args.column.field] : null;
             editingResources.forEach(obj => {
+              // Check if the name property of the object matches the value to compare
               if (obj.resourceName === valueToSet) {
                 valueToSet = obj.resourceId
                 return
@@ -1263,8 +1174,8 @@ function renderGrid(): void {
         }
       }
       if (args.requestType === 'save') {
-        if (args.data.resources) {
-          args.data.resources = args.data.resources
+        if (args.data.resources.length) {
+          args.data.resources = args.data.resources[0].resourceName
         }
         if (!args.data.Id) {
           if (Array.isArray(gridObj.dataSource)) {
@@ -1320,7 +1231,7 @@ function renderGrid(): void {
   //  rowHeight:30,
     height :"500px"
   });
-  gridObj.appendTo('#component-render-grid');
+  gridObj.appendTo('#Grid');
 
 }
 
@@ -1340,17 +1251,6 @@ function renderKanban(): void {
   let progressValue: any;
   let status: any;
   let data: Object[] = window.commonData;
-  let customFn: (args: { [key: string]: string }) => any = (args: { [key: string]: string }) => {
-    let value:number = parseInt(args['value'])
-    const kanbanStatusElement:any = document.getElementsByClassName('Status_wrapper')[0].querySelector('input')
-    if (kanbanStatusElement.ej2_instances[0]) {
-      if (kanbanStatusElement.ej2_instances[0].value == 'Close' && value < 100) {
-        return false
-      } else {
-        return true
-      }
-    }
-  };
   kanbanObj = new Kanban({ //Initialize Kanban control
     cssClass: "kanban-overview",
     dataSource: data,
@@ -1395,12 +1295,6 @@ function renderKanban(): void {
       }
     },
     dialogOpen: function (args) {
-      const numericTextboxElement = document.getElementsByClassName("e-numerictextbox")[3] as HTMLElement;
-      if (numericTextboxElement) {
-        const ej2Instances = (numericTextboxElement as any).ej2_instances;
-        ej2Instances[0].max = 100;
-        ej2Instances[0].min = 0;
-      }
       const fields = args.element.querySelectorAll('.e-field');
       const isCorrectFields = (
         fields[4]?.getAttribute('name') === 'StartTime' &&
@@ -1487,7 +1381,7 @@ function renderKanban(): void {
         { key: 'Id', text: 'ID', type: 'TextBox' },
         { key: 'Subject', text: 'Subject', type: 'TextArea' },
         { key: 'Status', text: 'Status', type: 'DropDown' },
-        { key: 'Progress', text: 'Progress', type: 'Numeric', validationRules: { required: true,minLength: [customFn, 'Progress Cant be less than 100 if the status is in close']} },
+        { key: 'Progress', text: 'Progress', type: 'Numeric' },
         { key: 'StartTime', text: 'StartTime' },
         { key: 'EndTime', text: 'EndTime' },
         { key: 'resources', text: 'Resources',validationRules:{ required: true}},
@@ -1508,7 +1402,7 @@ function renderKanban(): void {
       { headerText: 'Done', keyField: 'Close', template: '#headerTemplate' }
     ],
   });
-  kanbanObj.appendTo('#component-renderf');
+  kanbanObj.appendTo('#Kanban');
 }
 (window as TemplateFunction).getTags = (data: string) => {
   
@@ -1656,7 +1550,7 @@ function adjustGridHeight() {
   gridObj.element.style.overflow = "scroll";
 }
 function adjustResourceImageHeight() {
-  
+  debugger
   const viewportWidth = window.innerWidth;
   const targetImageSize = 37;
   const targetLeftValue = 30
@@ -1754,25 +1648,7 @@ function adjustDropDownLeft(): void {
 }
 function renderGantt(): void {
   let progressValue: any;
-  let isProgressResize:boolean;
   let status: any;
-  let customFn: (args: { [key: string]: string }) => any = (args: { [key: string]: string }) => {
-    let value:number = parseInt(args['value'])
-    const ganttStatusElement:any = document.getElementById('component-render-ganttStatus');
-    if (ganttStatusElement) {
-      if (ganttStatusElement.ej2_instances[0].value == "Close" && value < 100) {
-        return false
-      } else {
-        return true
-      }
-    } else {
-      if (status == "Close" && value < 100) {
-        return false
-      } else {
-        return true
-      }
-    }
-  };
   gantt = new Gantt(
     {
       dataSource: window.commonData,
@@ -1795,7 +1671,7 @@ function renderGantt(): void {
         { field: 'Subject', width: '350px' },
         { field: 'StartTime' },
         { field: 'EndTime' },
-        { field: 'Progress', validationRules: { required: true,minLength: [customFn, 'Progress Cant be less than 100 if the status is in close']} },
+        { field: 'Progress' },
         {
           field: 'Status',
           edit: {
@@ -1857,7 +1733,6 @@ function renderGantt(): void {
         { field: 'resources', template: '#columnTemplate' },
       ],
       created:function(args) {
-        
       },
       dataBound:function(args) {
         updateCardValue(gantt.dataSource)
@@ -1880,8 +1755,6 @@ function renderGantt(): void {
           args.taskbarBorderColor = 'rgba(194, 220, 240, 1)';
         } else if (args.data.taskData.Status == 'Close') {
           args.progressBarBgColor = 'rgba(182, 214, 171, 1)';
-          args.taskbarBgColor = 'rgba(182, 214, 171, 0.4)';
-          args.taskbarBorderColor = 'rgba(182, 214, 171, 1)';
         } else if (args.data.taskData.Status == 'Testing') {
           args.progressBarBgColor = 'rgba(244, 218, 168, 1)';
           args.taskbarBgColor = 'rgba(244, 218, 168, 0.4)';
@@ -1893,17 +1766,14 @@ function renderGantt(): void {
         name: 'resourceName',
       },
       resources: editingResources,
-      // labelSettings: {
-      //   rightLabel: 'resources',
-      //   taskLabel: '${Progress}%',
-      // },
+      labelSettings: {
+        rightLabel: 'resources',
+        taskLabel: '${Progress}%',
+      },
       actionBegin: function (args) {
         if (args.type == 'edit' || args.requestType == 'beforeOpenEditDialog') {
           progressValue = args.rowData.Progress;
           status = args.rowData.Status;
-        } else if (args.taskBarEditAction == 'ProgressResizing') {
-          progressValue = args.data.Progress;
-          isProgressResize = true
         }
         if (args.requestType == 'beforeSave') {
           if (progressValue != args.data.Progress) {
@@ -1921,7 +1791,7 @@ function renderGantt(): void {
             args.data.taskData.Status = 'Open';
           }
           if (status != args.data.Status) {
-            if (args.data.Progress < 100 && args.data.Status == "Close" && !isProgressResize) {
+            if (args.data.Progress < 100 && args.data.Status == "Close") {
               args.data.Progress = 100;
               args.data.taskData.Progress = 100;
               args.data.ganttProperties.progress = 100;
@@ -1932,13 +1802,6 @@ function renderGantt(): void {
               );
               window.commonData = gantt.dataSource;
             }
-          }
-          if (isProgressResize) {
-            if (args.data.Progress < 100 && args.data.Status == "Close") {
-              args.data.Status = 'InProgress';
-              args.data.taskData.Status = 'InProgress';
-            }
-            isProgressResize = false;
           }
         }
         if (
@@ -1954,13 +1817,15 @@ function renderGantt(): void {
           args.requestType == 'openAddDialog'
         ) {
           var resources = args.data.ganttProperties.resourceInfo;
-          let tabObj: any = (document.getElementById(gantt.element.id+'_Tab') as any)['ej2_instances'][0];
+          let tabObj: any = (document.getElementById('Gantt_Tab') as any)['ej2_instances'][0];
           tabObj.selected = function (args: any) {
             if (args.selectedIndex == 2) {
-              let gridObj: any = (document.getElementById(gantt.element.id+'ResourcesTabContainer_gridcontrol') as any)['ej2_instances'][0];
+              let gridObj: any = (document.getElementById('GanttResourcesTabContainer_gridcontrol') as any)['ej2_instances'][0];
               gridObj.selectionSettings = {
                 checkboxOnly: false,
+
                 type: 'Single',
+
                 persistSelection: false,
               };
               var currentViewData = gridObj.getCurrentViewRecords();
@@ -1984,34 +1849,21 @@ function renderGantt(): void {
           };
         }
         if (args.requestType == "save" ||args.requestType == "add"||args.requestType == "delete") {
-          if (args.requestType == "delete") {
-            var dataSourceArray = gantt.dataSource as any[];
-            var storeArgs = args;
-            var newArray = dataSourceArray.filter(function (item) {
-              return item.Id !== storeArgs.data[0].Id;
-            });
-            gantt.dataSource = newArray
-            window.commonData = gantt.dataSource
-            gridObj.dataSource =window.commonData
-            scheduleObj.eventSettings.dataSource = window.commonData;
-            scheduleObj.resources[1].dataSource = window.commonData;
-            kanbanObj.dataSource = window.commonData;
-          }
-          updateCardValue(gantt.dataSource)
+          //updateCardValue()
         }
       },
       rowHeight: 60,
     });
-  gantt.appendTo('#component-render-gantt');
+  gantt.appendTo('#Gantt');
   
 }
 //resize event
-// window.addEventListener("resize", adjustGanttHeight);
-// window.addEventListener('resize', adjustKanbanHeight);
-// window.addEventListener('resize', adjustSchedulerHeight);
-// window.addEventListener('resize', adjustGridHeight);
-// //window.addEventListener('resize', adjustDropDownHeight);
-// window.addEventListener('resize', adjustResourceImageHeight);
+window.addEventListener("resize", adjustGanttHeight);
+window.addEventListener('resize', adjustKanbanHeight);
+window.addEventListener('resize', adjustSchedulerHeight);
+window.addEventListener('resize', adjustGridHeight);
+window.addEventListener('resize', adjustDropDownHeight);
+window.addEventListener('resize', adjustResourceImageHeight);
 
 //
 // Scheduler 
@@ -2122,6 +1974,42 @@ function renderScheduler(): void {
 
           dropDownList.appendTo(inputEle);
         }
+        // if (formElement && !formElement.querySelector('.custom-field-row-resource')) {
+        //   let row = document.createElement('div');
+        //   row.className = 'custom-field-row-resource';
+
+        //   // Create a label for the input element
+        //   let label = document.createElement('label');
+        //   label.textContent = 'resources';
+
+        //   // Remove font-weight styles from the label
+        //   label.style.fontWeight = 'normal'; // Or 'unset'
+
+        //   let container = document.createElement('div');
+        //   container.className = 'custom-field-resources';
+
+        //   let inputEle = document.createElement('input');
+        //   inputEle.className = 'e-field';
+        //   inputEle.name = 'resources';
+
+        //   container.appendChild(inputEle);
+        //   row.appendChild(label); // Append the label
+        //   row.appendChild(container);
+
+        //   formElement.insertBefore(row, formElement.firstChild);
+        //   let resourceObject:any = getResourceObject(args.data.resources)
+        //   const valueToSet = args.data.resources? resourceObject.resourceId : null;
+        //   dropDownList = new DropDownList({
+        //     dataSource: editingResources,
+        //     fields: { text: 'resourceName', value: 'resourceId' },
+        //     value: valueToSet,
+        //   });
+        //   dropDownList.appendTo(inputEle);
+        // } else {
+        //   let resourceObject:any = getResourceObject(args.data.resources)
+        //   const valueToSet = args.data.resources ? resourceObject.resourceId : null;
+        //   dropDownList.value = valueToSet
+        // }
         if (
           formElement &&
           !formElement.querySelector('.custom-field-row-progress')
@@ -2147,38 +2035,14 @@ function renderScheduler(): void {
           // Set the type to "number" to create a numeric input
           inputEle.type = 'number';
           inputEle.style.width = '100%';
-          inputEle.max = "100";
-          inputEle.min="0";
-          let errorMessage = document.createElement('span');
-          errorMessage.className = 'error-message';
-          errorMessage.style.color = 'red';
-          errorMessage.style.display = 'none'; // Initially hide the error message
-          inputEle.addEventListener('focusout', function (event) {
-            const schedulerStatusElement:any =document.getElementsByClassName('custom-field-row')[0].querySelector('input')
-            const buttonElement = document.querySelector('.e-schedule-dialog.e-control.e-btn.e-lib.e-primary.e-event-save.e-flat') as HTMLButtonElement;
-            let enteredValue = parseInt(inputEle.value, 10);
-            if (enteredValue < 0) {
-              inputEle.value = '0'; // Set value as string '0'
-            }
-            if (enteredValue > 100) {
-              inputEle.value = '100';
-            }
-            if (schedulerStatusElement.ej2_instances[0].value == "Close" && enteredValue < 100) {
-              errorMessage.textContent = 'Progress Cant be less than 100 if the status is in close';
-              errorMessage.style.display = 'block';
-              (event.currentTarget as HTMLElement).style.borderColor = 'red';
-              buttonElement.disabled = true;
-            } else {
-              errorMessage.style.display = 'none'; 
-              (event.currentTarget as HTMLElement).style.borderColor = '';
-              buttonElement.disabled = false;
-            }
-          });
+
+          // Set the default value
           inputEle.value = args.data.Progress;
+
           container.appendChild(inputEle);
-          row.appendChild(headerLabel);
+          row.appendChild(headerLabel); // Append the header text
           row.appendChild(container);
-          row.appendChild(errorMessage); 
+
           formElement.insertBefore(row, formElement.firstChild);
         }
       }
@@ -2270,10 +2134,9 @@ function renderScheduler(): void {
       'Agenda',
     ],
   });
-  scheduleObj.appendTo("#component-render-scheduler")
+  scheduleObj.appendTo("#Scheduler")
 }
 function updateCardValue(passedData?:any): void {
-  debugger
   const projectValue = topDropDownInstance.value;
   const dateRangeValue = dateRangeInstance.value;
   const currentData = passedData?passedData: window[`sprintData${(projectValue as string).slice(-1)}`];
@@ -2292,22 +2155,22 @@ function updateCardValue(passedData?:any): void {
     counts[item.Status]++;
   });
 
-  updateCardElement('.detailcontainertodo', counts.Open,0);
-  updateCardElement('.detailcontainertodo', counts.InProgress,1);
-  updateCardElement('.detailcontainertodo', counts.Testing,2);
-  updateCardElement('.detailcontainertodo', counts.Close,3);
+  updateCardElement('.card1', counts.Open);
+  updateCardElement('.card2', counts.InProgress);
+  updateCardElement('.card3', counts.Testing);
+  updateCardElement('.card4', counts.Close);
 }
-function updateCardElement(selector: string, count: number,indexNumber:number): void {
-  const cardElement = document.querySelectorAll(selector)[indexNumber];
+function updateCardElement(selector: string, count: number): void {
+  const cardElement = document.querySelector(selector);
   const countTodoElement = cardElement?.querySelector('.counttodo');
   if (countTodoElement) {
     countTodoElement.innerHTML = count.toString();
   }
 }
 function bindClickEvent(): void {
-  const imageContainer: HTMLElement | null = document.getElementById('image-container') as HTMLElement;
+  const imageContainer: HTMLElement | null = document.getElementsByClassName('image-container')[0] as HTMLElement;
   if (imageContainer) {
-    const circularImages: NodeListOf<HTMLElement> = imageContainer.querySelectorAll('.circular-image1');
+    const circularImages: NodeListOf<HTMLElement> = imageContainer.querySelectorAll('.circular-image');
     circularImages.forEach((image: HTMLElement) => {
       image.addEventListener('click', (event: Event) => {
         const target = event.target as HTMLImageElement;
@@ -2335,223 +2198,51 @@ function bindClickEvent(): void {
     });
   }
 }
-function bindTabClickEvent(): void {
-  const kanban = document.getElementById("component-renderf") as HTMLElement;
-  const scheduler = document.getElementById("component-render-scheduler") as HTMLElement;
-  const gantt1 = document.getElementById("component-render-gantt") as HTMLElement;
-  const grid = document.getElementById("component-render-grid") as HTMLElement;
-  kanban.classList.add("show1")
-  const setActiveTab = (activeTab: HTMLElement, backgroundClass: string): void => {
-    const elements = [
-      document.getElementsByClassName("parent-kanban1")[0],
-      document.getElementsByClassName("parent-scheduler1")[0],
-      document.getElementsByClassName("parent-gantt1")[0],
-      document.getElementsByClassName("parent-grid1")[0]
-    ];
-    elements.forEach(element => {
-      if (element) {
-        element.classList.remove("show1-background");
-      }
-    });
-    if (activeTab) {
-      activeTab.classList.add("show1-background");
-    }
-    [kanban, scheduler, gantt1, grid].forEach(component => {
-      if (component) {
-        component.classList.remove("show1");
-      }
-    });
-    if (activeTab === document.getElementsByClassName("parent-kanban1")[0]) {
-      kanban?.classList.add("show1");
-      kanbanObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-scheduler1")[0]) {
-      scheduler?.classList.add("show1");
-      scheduleObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-gantt1")[0]) {
-      gantt1?.classList.add("show1");
-      setTimeout(() => {
-        gantt.refresh();
-      }, 0);
-    } else if (activeTab === document.getElementsByClassName("parent-grid1")[0]) {
-      grid?.classList.add("show1");
-      gridObj.refresh();
-      // setTimeout(() => {
-      //   gridObj.refresh();
-      // }, 0);
-    }
-  };
-  setActiveTab(document.getElementsByClassName("parent-kanban1")[0] as HTMLElement, "show1-background");
-  const parentElement = document.getElementsByClassName("centered-div1")[0] as HTMLElement;
-  parentElement?.childNodes.forEach(node => {
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const element = node as HTMLElement;
-      element.addEventListener("click", (e: any) => {
-        if (e.target.classList.contains("navimage-kanban1") || e.target.classList.contains("parent-kanban1")) {
-          setActiveTab(document.getElementsByClassName("parent-kanban1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-scheduler1") || e.target.classList.contains("parent-scheduler1")) {
-          setActiveTab(document.getElementsByClassName("parent-scheduler1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-gantt1") || e.target.classList.contains("parent-gantt1")) {
-          setActiveTab(document.getElementsByClassName("parent-gantt1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-grid1") || e.target.classList.contains("parent-grid1")) {
-          setActiveTab(document.getElementsByClassName("parent-grid1")[0] as HTMLElement, "show1-background");
-        }
-      });
-    }
-  });
-}
-function bindEventListeners(): void {
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  const clickOrTouchEvent = isTouchDevice ? 'touchstart' : 'click';
-  const kanban = document.getElementById("component-renderf") as HTMLElement;
-  const scheduler = document.getElementById("component-render-scheduler") as HTMLElement;
-  const gantt1 = document.getElementById("component-render-gantt") as HTMLElement;
-  const grid = document.getElementById("component-render-grid") as HTMLElement;
-  kanban.classList.add("show1");
-  const setActiveTab = (activeTab: HTMLElement, backgroundClass: string): void => {
-    const elements = [
-      document.getElementsByClassName("parent-kanban1")[1],
-      document.getElementsByClassName("parent-scheduler1")[1],
-      document.getElementsByClassName("parent-gantt1")[1],
-      document.getElementsByClassName("parent-grid1")[1]
-    ];
-    elements.forEach(element => {
-      if (element) {
-        element.classList.remove("show1-background");
-      }
-    });
-    if (activeTab) {
-      activeTab.classList.add("show1-background");
-    }
-    [kanban, scheduler, gantt1, grid].forEach(component => {
-      if (component) {
-        component.classList.remove("show1");
-      }
-    });
-    if (activeTab === document.getElementsByClassName("parent-kanban1")[1]) {
-      kanban?.classList.add("show1");
-      scheduleObj.refresh();
-      kanbanObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-scheduler1")[1]) {
-      scheduler?.classList.add("show1");
-      kanbanObj.refresh();
-      scheduleObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-gantt1")[1]) {
-      gantt1?.classList.add("show1");
-      scheduleObj.refresh();
-      kanbanObj.refresh();
-      setTimeout(() => {
-        gantt.refresh();
-      }, 0);
-    } else if (activeTab === document.getElementsByClassName("parent-grid1")[1]) {
-      grid?.classList.add("show1");
-      scheduleObj.refresh();
-      kanbanObj.refresh();
-      gantt.refresh();
-      gridObj.refresh();
-    }
-  };
-  const parentElement = document.getElementsByClassName("mobile-nav-bar1")[0] as HTMLElement;
-  parentElement?.childNodes.forEach(node => {
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const element = node as HTMLElement;
-      element.addEventListener(clickOrTouchEvent, (e: any) => {
-        if (e.target.classList.contains("navimage-kanban1") || e.target.classList.contains("parent-kanban1")) {
-          setActiveTab(document.getElementsByClassName("parent-kanban1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-scheduler1") || e.target.classList.contains("parent-scheduler1")) {
-          setActiveTab(document.getElementsByClassName("parent-scheduler1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-gantt1") || e.target.classList.contains("parent-gantt1")) {
-          setActiveTab(document.getElementsByClassName("parent-gantt1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-grid1") || e.target.classList.contains("parent-grid1")) {
-          setActiveTab(document.getElementsByClassName("parent-grid1")[1] as HTMLElement, "show1-background");
-        }
-      });
-    }
-  });
-}
-window.addEventListener('resize', function() {
-  if (window.innerWidth >= 700) {
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar1');
-    let storedClassName:any;
-    if (centeredDiv) {
-      const elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
-      elements.forEach(function (element: HTMLDivElement, index: number) {
-        if (element.classList.contains('show1-background')) {
-          storedClassName = element.classList[0]
-          element.classList.remove('show1-background')
-        }
-      });
-      if (storedClassName) {
-        document.getElementsByClassName(storedClassName)[0].classList.add("show1-background");
-      }
-    }
-  } else {
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div1');
-    let storedClassName:any;
-    if (centeredDiv) {
-      const elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
-      elements.forEach(function (element: HTMLDivElement, index: number) {
-        if (element.classList.contains('show1-background')) {
-          storedClassName = element.classList[0]
-          element.classList.remove('show1-background')
-        }
-      });
-      if (storedClassName) {
+// window.addEventListener('load', function() {
+//   var container = document.getElementById('imageContainer');
 
-        document.getElementsByClassName(storedClassName)[1].classList.add("show1-background");
-      }
-    }
-    // setTimeout(() => {
-    //   debugger
-    //   kanbanObj.refresh();
-    // }, 1000);
-  }
-});
-window.addEventListener('load', function() {
-  debugger
-  if (window.innerWidth < 380) {
-    document.getElementsByClassName("parent-kanban1")[1].classList.add("show1-background")
-  }
-});
-function bindScrollEvent(): void { 
-  var createContainer = document.querySelector('.create-container1');
-  if (createContainer !== null) {
-    createContainer.addEventListener('scroll', function (event) {
-      if (event.currentTarget instanceof HTMLElement) {
-        if (event.currentTarget.scrollTop > 110) {
-          var checkUdhaya = document.getElementsByClassName('check-udhaya')[0];
-          if (checkUdhaya instanceof HTMLElement) {
-            checkUdhaya.style.visibility = "hidden";
-          }
-        } else {
-          var checkUdhaya = document.getElementsByClassName('check-udhaya')[0];
-          if (checkUdhaya instanceof HTMLElement) {
-            checkUdhaya.style.visibility = "";
-          }
-        }
-      }
-    });
-  }
-}
+//   if (container) {
+//       var images = container.getElementsByClassName('circular-image');
+//       var totalWidth = 0;
+
+//       for (var i = 0; i < images.length; i++) {
+//           var image = images[i] as HTMLElement; // Typecast to HTMLElement
+//           totalWidth += image.offsetWidth; // Access offsetWidth property
+//       }
+
+//       container.style.width = totalWidth + 'px'; // Set the width of container
+//   }
+// });
+// window.addEventListener('load', function () {
+//   debugger
+//   var container = document.querySelector('.image-container') as HTMLElement;
+//   if (container) {
+//     var images = container.getElementsByClassName('circular-image');
+//     var totalWidth = 0;
+//     for (var i = 0; i < images.length; i++) {
+//       var image = images[i] as HTMLElement;
+//       totalWidth += image.offsetWidth;
+//     }
+//     container.style.width = totalWidth + 'px';
+//   }
+// });
 window.home = () => {
-   renderDataSourceDropDown();
-   renderButton();
-   timerangecompo();
-  // renderVisalComponents();
-   renderGrid();
-   renderKanban();
-   renderGantt();
-   renderScheduler();
-  // adjustKanbanHeight();
-  // adjustSchedulerHeight();
-  // adjustGridHeight();
-  // adjustGanttHeight();
-  // adjustResourceImageHeight();
-  // adjustDropDownHeight();
+  renderDataSourceDropDown();
+  renderButton();
+  timerangecompo();
+  renderVisalComponents();
+  renderGrid();
+  renderKanban();
+  renderGantt();
+  renderScheduler();
+  adjustKanbanHeight();
+  adjustSchedulerHeight();
+  adjustGridHeight();
+  adjustGanttHeight();
+  adjustResourceImageHeight();
+  adjustDropDownHeight();
   updateCardValue();
   bindClickEvent();
-  bindTabClickEvent();
-  bindEventListeners();
-  bindScrollEvent();
 };
 
 function getResourceObject(resourceStr:any) {
