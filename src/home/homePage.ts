@@ -2203,7 +2203,7 @@ function renderScheduler(): void {
         }
       }
     },
-    currentView: 'Month',
+    currentView: 'TimelineMonth',
     eventRendered: function (args) {
       applyCategoryColor(args, scheduleObj.currentView);
     },
