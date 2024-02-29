@@ -22,6 +22,8 @@ import {
 } from '@syncfusion/ej2-schedule';
 import { Button } from '@syncfusion/ej2-buttons';
 import { NumericTextBox } from '@syncfusion/ej2-inputs';
+import { registerLicense } from '@syncfusion/ej2-base';
+
 
 
 Gantt.Inject(Edit, Selection, Toolbar, DayMarkers);
@@ -1756,6 +1758,7 @@ function renderGantt(): void {
   let progressValue: any;
   let isProgressResize:boolean;
   let status: any;
+  registerLicense('');
   let customFn: (args: { [key: string]: string }) => any = (args: { [key: string]: string }) => {
     let value:number = parseInt(args['value'])
     const ganttStatusElement:any = document.getElementById('component-render-ganttStatus');
@@ -2273,7 +2276,6 @@ function renderScheduler(): void {
   scheduleObj.appendTo("#component-render-scheduler")
 }
 function updateCardValue(passedData?:any): void {
-  debugger
   const projectValue = topDropDownInstance.value;
   const dateRangeValue = dateRangeInstance.value;
   const currentData = passedData?passedData: window[`sprintData${(projectValue as string).slice(-1)}`];
@@ -2305,6 +2307,20 @@ function updateCardElement(selector: string, count: number,indexNumber:number): 
   }
 }
 function bindClickEvent(): void {
+  var anchorTags = document.querySelectorAll('body a');
+  if (anchorTags) {
+    for (var i = 0; i < anchorTags.length; i++) {
+      var currentAnchor = anchorTags[i];
+      if (currentAnchor) {
+        if (currentAnchor.textContent && currentAnchor.textContent.trim() === 'Claim your free account') {
+          var parentElement = currentAnchor.parentElement;
+          if (parentElement) {
+            parentElement.remove()
+          }
+        }
+      }
+    }
+  }
   const imageContainer: HTMLElement | null = document.getElementById('image-container') as HTMLElement;
   if (imageContainer) {
     const circularImages: NodeListOf<HTMLElement> = imageContainer.querySelectorAll('.circular-image1');
@@ -2507,7 +2523,6 @@ window.addEventListener('resize', function() {
   }
 });
 window.addEventListener('load', function() {
-  debugger
   if (window.innerWidth < 380) {
     document.getElementsByClassName("parent-kanban1")[1].classList.add("show1-background")
   }

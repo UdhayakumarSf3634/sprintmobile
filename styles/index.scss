@@ -426,6 +426,15 @@ body, html {
     #component-render-grid .e-gridheader {
         width: 300% !important;
     }
+    .parent-kanban1:hover, 
+    .parent-scheduler1:hover, 
+    .parent-gantt1:hover, 
+    .parent-grid1:hover {
+        border: none; /* Remove the border */
+    }
+    .circular-image1:hover {
+        box-shadow: none; /* Remove the box shadow */
+    }
 }
 
 @media only screen and (min-width: 700px) {
@@ -446,6 +455,7 @@ body, html {
         flex-direction: column;
         padding: 0;
         padding-bottom: 0;
+        margin-right: 10px;
     }
     .mainimagetodo,
     .mainimageprogress,

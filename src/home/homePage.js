@@ -22,6 +22,7 @@ var ej2_gantt_1 = require("@syncfusion/ej2-gantt");
 var ej2_calendars_1 = require("@syncfusion/ej2-calendars");
 var ej2_dropdowns_1 = require("@syncfusion/ej2-dropdowns");
 var ej2_schedule_1 = require("@syncfusion/ej2-schedule");
+var ej2_base_2 = require("@syncfusion/ej2-base");
 ej2_gantt_1.Gantt.Inject(ej2_gantt_1.Edit, ej2_gantt_1.Selection, ej2_gantt_1.Toolbar, ej2_gantt_1.DayMarkers);
 ej2_schedule_1.Schedule.Inject(ej2_schedule_1.Day, ej2_schedule_1.Week, ej2_schedule_1.WorkWeek, ej2_schedule_1.Month, ej2_schedule_1.Year, ej2_schedule_1.Agenda, ej2_schedule_1.TimelineViews, ej2_schedule_1.TimelineMonth, ej2_schedule_1.TimelineYear, ej2_schedule_1.DragAndDrop, ej2_schedule_1.Resize, ej2_schedule_1.ExcelExport, ej2_schedule_1.ICalendarExport, ej2_schedule_1.ICalendarImport, ej2_schedule_1.Print);
 ej2_grids_1.Grid.Inject(ej2_grids_1.Page, ej2_grids_1.Edit, ej2_grids_1.Toolbar, ej2_grids_1.Group);
@@ -1712,6 +1713,7 @@ function renderGantt() {
     var progressValue;
     var isProgressResize;
     var status;
+    (0, ej2_base_2.registerLicense)('');
     var customFn = function (args) {
         var value = parseInt(args['value']);
         var ganttStatusElement = document.getElementById('component-render-ganttStatus');
@@ -2199,7 +2201,6 @@ function renderScheduler() {
     scheduleObj.appendTo("#component-render-scheduler");
 }
 function updateCardValue(passedData) {
-    debugger;
     var projectValue = topDropDownInstance.value;
     var dateRangeValue = dateRangeInstance.value;
     var currentData = passedData ? passedData : window["sprintData".concat(projectValue.slice(-1))];
@@ -2225,6 +2226,20 @@ function updateCardElement(selector, count, indexNumber) {
     }
 }
 function bindClickEvent() {
+    var anchorTags = document.querySelectorAll('body a');
+    if (anchorTags) {
+        for (var i = 0; i < anchorTags.length; i++) {
+            var currentAnchor = anchorTags[i];
+            if (currentAnchor) {
+                if (currentAnchor.textContent && currentAnchor.textContent.trim() === 'Claim your free account') {
+                    var parentElement = currentAnchor.parentElement;
+                    if (parentElement) {
+                        parentElement.remove();
+                    }
+                }
+            }
+        }
+    }
     var imageContainer = document.getElementById('image-container');
     if (imageContainer) {
         var circularImages_1 = imageContainer.querySelectorAll('.circular-image1');
@@ -2439,7 +2454,6 @@ window.addEventListener('resize', function () {
     }
 });
 window.addEventListener('load', function () {
-    debugger;
     if (window.innerWidth < 380) {
         document.getElementsByClassName("parent-kanban1")[1].classList.add("show1-background");
     }
