@@ -175,7 +175,7 @@ body, html {
     flex-wrap: wrap;
 }
 .inner-cadr {
-    width: calc(23% - 10px);
+    width: calc(22% - 10px);
     border: 1.5px solid #f0f0f0;
     padding: 15px;
     padding-left: 0;
@@ -457,7 +457,8 @@ body, html {
         flex-direction: column;
         padding: 0;
         padding-bottom: 0;
-        margin-right: 15px;
+        margin-right: 10px;
+        width: calc(24% - 10px);
     }
     .mainimagetodo,
     .mainimageprogress,
@@ -484,6 +485,7 @@ body, html {
     }
     .change-font {
         font-size: 13px;
+        white-space: nowrap;
     }
 }
 @media only screen and (min-width: 1500px) {
