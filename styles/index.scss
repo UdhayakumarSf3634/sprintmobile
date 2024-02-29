@@ -435,6 +435,7 @@ body, html {
     .circular-image1:hover {
         box-shadow: none; /* Remove the box shadow */
     }
+    
 }
 
 @media only screen and (min-width: 700px) {
@@ -479,6 +480,9 @@ body, html {
         font-size: 14px; /* Reduce font size for smaller screens */
         margin-bottom: 15px;
         text-align: center;
+    }
+    .change-font {
+        font-size: 13px;
     }
 }
 @media only screen and (min-width: 1500px) {
