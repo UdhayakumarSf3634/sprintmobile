@@ -802,6 +802,7 @@ function idExistsInArray(id: any, array: any[]) {
 }
 function renderButton(): void {
   document.getElementsByClassName('button1')[0]?.addEventListener('click', () => {
+    debugger
     const projectValue = topDropDownInstance.value as string;
     const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
     
@@ -1480,7 +1481,23 @@ function renderKanban(): void {
       if (args.requestType == "cardCreated") {
         if (isStatusChange) {
           updateCardValue(kanbanObj.dataSource)
+          const projectValue = topDropDownInstance.value;
+          switch (projectValue) {
+            case 'Project1':
+              window.sprintData1 = kanbanObj.dataSource
+              window.commonData = kanbanObj.dataSource
+              break;
+            case 'Project2':
+              window.sprintData2 = kanbanObj.dataSource
+              window.commonData = kanbanObj.dataSource
+              break;
+            case 'Project3':
+              window.sprintData3 = kanbanObj.dataSource
+              window.commonData = kanbanObj.dataSource
+              break;
+          }
           isStatusChange = false
+
         }
       }
     },

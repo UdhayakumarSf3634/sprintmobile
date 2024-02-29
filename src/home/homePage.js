@@ -793,6 +793,7 @@ function idExistsInArray(id, array) {
 function renderButton() {
     var _a, _b;
     (_a = document.getElementsByClassName('button1')[0]) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+        debugger;
         var projectValue = topDropDownInstance.value;
         var projectData = window["sprintData".concat(projectValue.charAt(projectValue.length - 1))];
         if (!projectData || projectData.length === 0) {
@@ -1440,6 +1441,21 @@ function renderKanban() {
             if (args.requestType == "cardCreated") {
                 if (isStatusChange) {
                     updateCardValue(kanbanObj.dataSource);
+                    var projectValue = topDropDownInstance.value;
+                    switch (projectValue) {
+                        case 'Project1':
+                            window.sprintData1 = kanbanObj.dataSource;
+                            window.commonData = kanbanObj.dataSource;
+                            break;
+                        case 'Project2':
+                            window.sprintData2 = kanbanObj.dataSource;
+                            window.commonData = kanbanObj.dataSource;
+                            break;
+                        case 'Project3':
+                            window.sprintData3 = kanbanObj.dataSource;
+                            window.commonData = kanbanObj.dataSource;
+                            break;
+                    }
                     isStatusChange = false;
                 }
             }
