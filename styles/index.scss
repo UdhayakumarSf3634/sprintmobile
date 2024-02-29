@@ -413,6 +413,7 @@ body, html {
     .component-container1 {
         max-height: 90vh;
         overflow-y: auto;
+        padding-bottom: 50px;
     }
     #component-render-scheduler .e-content-wrap tbody {
        height: 90vh;
