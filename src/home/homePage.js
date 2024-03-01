@@ -1122,6 +1122,7 @@ function renderGrid() {
     gridObj = new ej2_grids_1.Grid({
         dataSource: window.commonData,
         allowGrouping: true,
+        height: "100%",
         groupSettings: { showDropArea: false, captionTemplate: '#captiontemplate', columns: ['resources'] },
         columns: [
             { field: 'Id', allowEditing: true },
@@ -1291,8 +1292,6 @@ function renderGrid() {
             newRowPosition: 'Top',
             mode: 'Dialog'
         },
-        //  rowHeight:30,
-        height: "500px"
     });
     gridObj.appendTo('#component-render-grid');
 }
@@ -1319,6 +1318,7 @@ function renderKanban() {
         dataSource: data,
         keyField: 'Status',
         enableTooltip: true,
+        height: "100%",
         swimlaneSettings: {
             keyField: 'resources'
         },
@@ -1755,6 +1755,7 @@ function renderGantt() {
         treeColumnIndex: 1,
         viewType: "ResourceView",
         collapseAllParentTasks: false,
+        height: "100%",
         taskFields: {
             id: 'Id',
             name: 'Subject',
@@ -2005,7 +2006,7 @@ function renderScheduler() {
     var status;
     var dropDownList;
     scheduleObj = new ej2_schedule_1.Schedule({
-        //height: '650px',
+        height: '100%',
         selectedDate: new Date(2021, 0, 14),
         eventSettings: { dataSource: window.commonData },
         popupOpen: function (args) {
@@ -2432,6 +2433,13 @@ function bindEventListeners() {
     });
 }
 window.addEventListener('resize', function () {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 500) {
+        document.getElementsByClassName('component-contain')[0].classList.remove('add-overflow');
+    }
+    else {
+        document.getElementsByClassName('component-contain')[0].classList.add('add-overflow');
+    }
     if (window.innerWidth >= 700) {
         var centeredDiv = document.querySelector('.mobile-nav-bar1');
         var storedClassName_1;
@@ -2470,6 +2478,12 @@ window.addEventListener('resize', function () {
     }
 });
 window.addEventListener('load', function () {
+    if (window.innerWidth < 500) {
+        document.getElementsByClassName('component-contain')[0].classList.remove('add-overflow');
+    }
+    else {
+        document.getElementsByClassName('component-contain')[0].classList.add('add-overflow');
+    }
     if (window.innerWidth < 380) {
         document.getElementsByClassName("parent-kanban1")[1].classList.add("show1-background");
     }
