@@ -1,8 +1,6 @@
 /**
  *  Default page code.
  */
-
-import { Tab } from '@syncfusion/ej2-navigations';
 import {
   Grid, Page, Edit as GridEdit,
   Toolbar as GridToolbar,
@@ -20,11 +18,7 @@ import {
   Schedule, Day, Week, WorkWeek, Month, Year, Agenda, TimelineViews, TimelineMonth, TimelineYear, Resize, DragAndDrop,
   ICalendarExport, ICalendarImport, Print, ExcelExport, ResourcesModel, CellClickEventArgs, Timezone
 } from '@syncfusion/ej2-schedule';
-import { Button } from '@syncfusion/ej2-buttons';
-import { NumericTextBox } from '@syncfusion/ej2-inputs';
 import { registerLicense } from '@syncfusion/ej2-base';
-
-
 
 Gantt.Inject(Edit, Selection, Toolbar, DayMarkers);
 Schedule.Inject(Day, Week, WorkWeek, Month, Year, Agenda, TimelineViews, TimelineMonth, TimelineYear, DragAndDrop, Resize, ExcelExport, ICalendarExport, ICalendarImport, Print);
@@ -667,7 +661,6 @@ window.sprintData3 = [
 ];
 window.commonData = window.sprintData1;
 let storeScheduleEditID: any;
-let tabObj: Tab;
 let gridObj: Grid;
 let kanbanObj: Kanban;
 let gantt: Gantt;
@@ -712,27 +705,15 @@ function updateCommonDataAndRefreshComponents(commonData: any) {
   setTimeout(() => {
     if (kanbanObj) {
       kanbanObj.refresh();
-      // setTimeout(() => {
-      //   adjustKanbanHeight();
-      // }, 0);
     }
     if (scheduleObj) {
       scheduleObj.refresh();
-      // setTimeout(() => {
-      //   adjustSchedulerHeight();
-      // }, 0);
     }
     if (gantt) {
       gantt.refresh();
-      // setTimeout(() => {
-      //   adjustGanttHeight();
-      // }, 0);
     }
     if (gridObj) {
       gridObj.refresh();
-      // setTimeout(() => {
-      //   adjustGridHeight();
-      // }, 0);
     }
   }, 0);
   setTimeout(() => {
@@ -749,7 +730,6 @@ const filterAndUpdateData = (projectData: any) => {
   if (dateRangeInstance.value !== null) {
     const givenStartDate = dateRangeInstance.startDate;
     const givenEndDate = dateRangeInstance.endDate;
-
     filteredValue = filteredValue.filter((obj: { StartTime: string | number | Date; EndTime: string | number | Date; }) => {
       const startDate = new Date(obj.StartTime);
       const endDate = new Date(obj.EndTime);
@@ -759,7 +739,6 @@ const filterAndUpdateData = (projectData: any) => {
       return startDate >= givenStartDateObj && endDate <= givenEndDateObj;
     });
   }
-
   updateCommonDataAndRefreshComponents(filteredValue);
 };
 function renderDataSourceDropDown(): void {
@@ -797,12 +776,10 @@ function renderDataSourceDropDown(): void {
   topDropDownInstance.appendTo("#datasourceDropDown")
 }
 function idExistsInArray(id: any, array: any[]) {
-   // Add the debugger statement here
   return array.some(obj => obj.Id === id);
 }
 function renderButton(): void {
-  document.getElementsByClassName('button1')[0]?.addEventListener('click', () => {
-    debugger
+  document.getElementsByClassName('button')[0]?.addEventListener('click', () => {
     const projectValue = topDropDownInstance.value as string;
     const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
     
@@ -820,7 +797,7 @@ function renderButton(): void {
 
     data.Id = newId;
     let indexValue:any;
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div1');
+    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div');
     if (centeredDiv) {
       let elements: any = centeredDiv.querySelectorAll('div');
       let parentDiv:any =[];
@@ -839,19 +816,9 @@ function renderButton(): void {
     switch (indexValue) {
       case 0:
         kanbanObj.openDialog("Add",data)
-      //  kanbanObj.addCard(data);
         break;
       case 1:
         scheduleObj.openEditor(data,"Add")
-        var resource = { ...data.resources[0] }
-        // scheduleObj.addEvent(data)
-        // setTimeout(() => {
-        //   debugger
-        //   scheduleObj.eventsData[scheduleObj.eventsData.length-1].resources[0] = resource
-        //   const projectValue = topDropDownInstance.value as string;
-        //   const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
-        //   projectData[projectData.length-1].resources[0] = resource
-        // })
         break;
       case 2:
         gantt.openAddDialog();
@@ -859,7 +826,6 @@ function renderButton(): void {
       case 3:
         gridObj.editSettings.mode = "Dialog"
         gridObj.editModule.addRecord();
-      //  gridObj.addRecord(data);
         break;
     }
   });
@@ -876,7 +842,7 @@ function renderButton(): void {
     } while (idExistsInArray(newId, projectData));
     data.Id = newId;
     let indexValue:any;
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar1');
+    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar');
     if (centeredDiv) {
       let elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
       let parentDiv:any =[];
@@ -895,19 +861,9 @@ function renderButton(): void {
     switch (indexValue) {
       case 0:
         kanbanObj.openDialog("Add",data)
-      //  kanbanObj.addCard(data);
         break;
       case 1:
         scheduleObj.openEditor(data,"Add")
-        var resource = { ...data.resources[0] }
-        // scheduleObj.addEvent(data)
-        // setTimeout(() => {
-        //   debugger
-        //   scheduleObj.eventsData[scheduleObj.eventsData.length-1].resources[0] = resource
-        //   const projectValue = topDropDownInstance.value as string;
-        //   const projectData = window[`sprintData${projectValue.charAt(projectValue.length - 1)}`];
-        //   projectData[projectData.length-1].resources[0] = resource
-        // })
         break;
       case 2:
         gantt.openAddDialog();
@@ -915,7 +871,6 @@ function renderButton(): void {
       case 3:
         gridObj.editSettings.mode = "Dialog"
         gridObj.editModule.addRecord();
-      //  gridObj.addRecord(data);
         break;
     }
   })
@@ -976,109 +931,6 @@ function timerangecompo(): void {
     endDate: new Date(2023, 0, 1),
   });
   dateRangeInstance.appendTo("#timerangecompo1")
-}
-function renderVisalComponents(): void {
-  tabObj = new Tab({
-    height: "100%",
-    heightAdjustMode: 'None',
-    headerPlacement:'Left',
-    created: function () {
-      let toolbarItems = document.getElementsByClassName("e-toolbar-items")[0] as HTMLElement;
-      var parentDiv = document.createElement("div");
-      parentDiv.classList.add("tap")
-      while (toolbarItems.firstChild) {
-        parentDiv.appendChild(toolbarItems.firstChild);
-      }
-      while (toolbarItems.firstChild) {
-        toolbarItems.removeChild(toolbarItems.firstChild);
-      }
-      toolbarItems.appendChild(parentDiv);
-      if (toolbarItems) {
-        toolbarItems.style.display = 'flex';
-        toolbarItems.style.justifyContent = 'space-between';
-        toolbarItems.style.flexDirection = 'column';
-        toolbarItems.style.alignItems = 'center';
-      }
-      var newDiv = document.createElement("div");
-      newDiv.classList.add("userImage");
-      var userImageParentDiv = document.createElement("div");
-      userImageParentDiv.classList.add("userImageParentDiv");
-      userImageParentDiv.appendChild(newDiv)
-      if (userImageParentDiv) {
-        userImageParentDiv.style.display = 'flex';
-        userImageParentDiv.style.alignItems = 'center';
-        userImageParentDiv.style.marginBottom = '5px';
-      }
-      toolbarItems.appendChild(userImageParentDiv);
-      var newDiv2 = document.createElement("div");
-      newDiv2.classList.add("topImage");
-      var topImageParentDiv = document.createElement("div");
-      topImageParentDiv.classList.add("topImageParentDIv")
-      topImageParentDiv.style.marginTop = '8px';
-      topImageParentDiv.appendChild(newDiv2)
-      toolbarItems.insertBefore(topImageParentDiv, toolbarItems.firstChild);
-      const tabHeaders = document.getElementsByClassName('e-tab-header') as HTMLCollectionOf<HTMLElement>;
-      if (tabHeaders.length > 0) {
-        tabHeaders[0].style.background = '#0D9488';
-      }
-      tabObj.element.classList.add('e-accent');
-    },
-    selected: function (args) {
-      switch (args.selectedIndex) {
-        case 0:
-          setTimeout(() => {
-            kanbanObj.refresh();
-            setTimeout(() => {
-              adjustKanbanHeight();
-            }, 0);
-          }, 100);
-          break;
-        case 1:
-          setTimeout(() => {
-            scheduleObj.refresh();
-            setTimeout(() => {
-              adjustSchedulerHeight();
-            }, 0);
-          }, 100);
-          break;
-        case 2:
-          setTimeout(() => {
-            gantt.refresh();
-            setTimeout(() => {
-              adjustGanttHeight();
-            }, 0);
-          }, 300);
-          break;
-        case 3:
-          setTimeout(() => {
-            gridObj.refresh();
-            setTimeout(() => {
-              adjustGridHeight();
-            }, 0);
-          }, 100);
-          break;
-      }
-    },
-    items: [
-      {
-        header: { 'iconCss': 'e-taskboard' },
-        content: '#Kanban'
-      },
-      {
-        header: { 'iconCss': 'e-event-scheduler'  },
-        content: '#Scheduler'
-      },
-      {
-        header: { 'iconCss': 'e-task-management' },
-        content: '#Gantt'
-      },
-      {
-        header: { 'iconCss': 'e-grid-management' },
-        content: '#Grid'
-      }
-    ]
-  });
-  tabObj.appendTo('#paymentGraph');
 }
 
 // grid
@@ -1303,15 +1155,6 @@ function renderGrid(): void {
     },
     dataBound:function (args) {
       updateCardValue(gridObj.dataSource)
-    },
-    actionComplete:function (args) {
-      if (args.requestType != 'refresh') {
-     //   updateCardValue()
-      }
-    },
-    toolbarClick:function (args) {
-      
-      
     },
     toolbar: ['Add', 'Edit', 'Delete', 'Update', 'Cancel'],
     editSettings: {
@@ -1622,155 +1465,8 @@ function adjustGanttHeight() {
   }
   gantt.element.style.overflow = "scroll";
   const paddingBottom = 0.17 * viewportHeight;
-  //(document.getElementsByClassName("topImage")[0] as HTMLElement).style.paddingBottom = paddingBottom +'px';
- // (document.getElementsByClassName("userImage")[0] as HTMLElement).style.paddingTop = paddingBottom +'px';
-  // var windowHeight = window.innerHeight;
-  // var ganttHeightPercentage = 60; // Adjust this percentage based on your requirement
-  // var ganttHeight = (windowHeight * ganttHeightPercentage) / 100;
-  // var paddingPercentage =  (21/100) * windowHeight;
-  // let verticalHeight: number = calculateDiff();
-  // const paddingBottomValue: number = 0.23 * verticalHeight;
-  // (document.getElementsByClassName("topImage")[0] as HTMLElement).style.paddingBottom = `${paddingBottomValue}px`;
-  // tabObj.height = windowHeight  + "px";
-  // (<HTMLElement>document.getElementsByClassName("e-tab-header")[0]).style.height = windowHeight  + "px";
-  // setTimeout(function() {
-  //   gantt.height = ganttHeight + "px";
-  //   const ganttElement = document.getElementById('Gantt') as any;
-  //   const ganttInstance = ganttElement.ej2_instances[0];
-  //   const ganttHeight1 = ganttHeight + "px";
-  //   ganttInstance.height = (ganttHeight + 7) + "px";
-  // }, 100);
-}
-function adjustKanbanHeight() {
-  const viewportHeight = window.innerHeight;
-  const kanbanHeight = 0.45 * viewportHeight;
-  const kanbanBottom = kanbanObj.element.getBoundingClientRect().bottom;
-  if (kanbanBottom > viewportHeight) {
-      kanbanObj.element.style.height = viewportHeight - kanbanObj.element.offsetTop -290+ 'px';
-  } else {
-      kanbanObj.element.style.height = kanbanHeight + 'px';
-  }
-  kanbanObj.element.style.overflow = "scroll";
-}
-function adjustSchedulerHeight() {
-  const viewportHeight = window.innerHeight;
-  const SchedulerHeight = 0.45 * viewportHeight;
-  const SchedulerBottom = scheduleObj.element.getBoundingClientRect().bottom;
-  if (SchedulerBottom > viewportHeight) {
-      scheduleObj.element.style.height = viewportHeight - scheduleObj.element.offsetTop -290 + 'px';
-  } else {
-      scheduleObj.element.style.height = SchedulerHeight + 'px';
-  }
-  scheduleObj.element.style.overflow = "scroll";
-}
-function adjustGridHeight() {
-  const viewportHeight = window.innerHeight;
-  const gridHeight = 0.5 * viewportHeight;
-  const gridBottom = gridObj.element.getBoundingClientRect().bottom;
-  if (gridBottom > viewportHeight) {
-    gridObj.element.style.height = viewportHeight - gridObj.element.offsetTop -290+ 'px';
-  } else {
-    gridObj.element.style.height = gridHeight + 'px';
-  }
-  gridObj.element.style.overflow = "scroll";
-}
-function adjustResourceImageHeight() {
-  
-  const viewportWidth = window.innerWidth;
-  const targetImageSize = 37;
-  const targetLeftValue = 30
-  const imageLeftPercentage = 2;
-  const sizePercentage = 3.5;
-  const imageSize = viewportWidth * (sizePercentage / 100);
-  let imageLeft = viewportWidth * (imageLeftPercentage / 100);
-  const newSize = Math.min(imageSize, targetImageSize);
-  let newLeftSize = Math.min(imageLeft, targetLeftValue);
-  const imageContainer = document.querySelector('.image-container');
-  if (imageContainer) {
-    const images = imageContainer.querySelectorAll('img');
-    let leftValue = 0;
-    images.forEach((img, index) => {
-      img.style.width = newSize + 'px';
-      img.style.height = newSize + 'px';
-      if (index !== 0) {
-        if (window.innerWidth > 1500) {
-          leftValue += (newLeftSize+(newLeftSize * 0.25));
-        } else {
-          leftValue += (newLeftSize+(newLeftSize * 0.3));
-        }
-      }
-      img.style.left = (newLeftSize + leftValue) + 'px';
-    });
-  }
 }
 
-function adjustDropDownHeight() {
-  const viewportWidth = window.innerWidth;
-  const sizePercentage = 16;
-  const elementSize = viewportWidth * (sizePercentage / 100);
-  const newSize = Math.min(elementSize, 200);
-  timeRageWidth = newSize
-  const elementContainers = document.querySelectorAll('.datasourceDropDownParent, .timerangecompoParent');
-  elementContainers.forEach(elementContainer => {
-    const firstElement = elementContainer.querySelector('span');
-    if (firstElement) {
-      firstElement.style.width = newSize + 'px';
-    }
-  });
-  adjustDropDownLeft();
-}
-function adjustDropDownLeft(): void {
-  const element = document.querySelector('.e-tab-header.e-vertical.e-vertical-left.e-control.e-toolbar.e-lib.e-keyboard') as HTMLElement;
-  const contentPadding: HTMLElement | null = document.querySelector('.e-item.e-active');
-  if (element && contentPadding) {
-    const width =  parseInt(window.getComputedStyle(element).width);
-    const styles = window.getComputedStyle(contentPadding);
-    const paddingLeft: number = parseFloat(styles.paddingLeft);
-    const dataSourceContainers = document.querySelectorAll('.datasourceDropDownParent');
-    dataSourceContainers.forEach(element => {
-      const elementContainer = element as HTMLElement;
-      elementContainer.style.left = (width +paddingLeft)  + 'px';
-    });
-    if (contentPadding instanceof HTMLElement) {
-      const styles = window.getComputedStyle(contentPadding);
-      const paddingRight: number = parseFloat(styles.paddingRight);
-      const width: number = contentPadding.offsetWidth;
-      const tabWidth:number = parseInt(window.getComputedStyle(element).width);
-      const timeRangeContainers = document.querySelectorAll('.timerangecompoParent');
-      timeRangeContainers.forEach(element => {
-        const elementContainer = element as HTMLElement;
-        let widthWithPaddingBorderScrollbar: number = elementContainer.offsetWidth;
-        const spanElement = elementContainer.querySelector('span');
-        if (spanElement) {
-          widthWithPaddingBorderScrollbar = spanElement.offsetWidth;
-        }
-        elementContainer.style.left =(tabWidth+width - widthWithPaddingBorderScrollbar -paddingRight -paddingRight)  + 'px';
-        const imageContainer = document.querySelector('.image-container') as HTMLElement;
-        if (imageContainer) {
-          imageContainer.style.left = parseInt(elementContainer.style.left) - widthWithPaddingBorderScrollbar + 'px'
-        }
-      })
-      // const width1 = element1.clientWidth;
-      // const timeRangeContainers = document.querySelectorAll('.timerangecompoParent');
-      // timeRangeContainers.forEach(element => {
-      //   const elementContainer = element as HTMLElement;
-      //   if (width1 > 300) {
-      //     elementContainer.style.left =(width1-260)  + 'px';
-      //     const imageContainer = document.querySelector('.image-container') as HTMLElement;
-      //     if (imageContainer) {
-      //       imageContainer.style.left = (width1-260 - timeRageWidth) +'px'
-      //     }
-      //   } else {
-      //     elementContainer.style.left =(width1-50)  + 'px';
-      //     const imageContainer = document.querySelector('.image-container') as HTMLElement;
-      //     if (imageContainer) {
-      //       imageContainer.style.left = (width1-50 - timeRageWidth) +'px'
-      //     }
-      //   }
-      // });
-    }
-  }
-}
 function renderGantt(): void {
   let progressValue: any;
   let isProgressResize:boolean;
@@ -1974,7 +1670,7 @@ function renderGantt(): void {
           args.requestType == 'openEditDialog' ||
           args.requestType == 'openAddDialog'
         ) {
-          var resources = args.data.ganttProperties.resourceInfo;
+          let resources: any = args.data.ganttProperties.resourceInfo;
           let tabObj: any = (document.getElementById(gantt.element.id+'_Tab') as any)['ej2_instances'][0];
           tabObj.selected = function (args: any) {
             if (args.selectedIndex == 2) {
@@ -1984,11 +1680,11 @@ function renderGantt(): void {
                 type: 'Single',
                 persistSelection: false,
               };
-              var currentViewData = gridObj.getCurrentViewRecords();
+              let currentViewData: any = gridObj.getCurrentViewRecords();
               let indexs: any = [];
               if (resources && resources.length > 0) {
                 currentViewData.forEach(function (data: any, index: any) {
-                  for (var i = 0; i < resources.length; i++) {
+                  for (let i = 0; i < resources.length; i++) {
                     if (
                       data.taskData['resourceId'] ===
                       resources[i]['resourceId'] &&
@@ -2006,9 +1702,9 @@ function renderGantt(): void {
         }
         if (args.requestType == "save" ||args.requestType == "add"||args.requestType == "delete") {
           if (args.requestType == "delete") {
-            var dataSourceArray = gantt.dataSource as any[];
-            var storeArgs = args;
-            var newArray = dataSourceArray.filter(function (item) {
+            let dataSourceArray = gantt.dataSource as any[];
+            let storeArgs = args;
+            let newArray = dataSourceArray.filter(function (item: any) {
               return item.Id !== storeArgs.data[0].Id;
             });
             gantt.dataSource = newArray
@@ -2026,15 +1722,6 @@ function renderGantt(): void {
   gantt.appendTo('#component-render-gantt');
   
 }
-//resize event
-// window.addEventListener("resize", adjustGanttHeight);
-// window.addEventListener('resize', adjustKanbanHeight);
-// window.addEventListener('resize', adjustSchedulerHeight);
-// window.addEventListener('resize', adjustGridHeight);
-// //window.addEventListener('resize', adjustDropDownHeight);
-// window.addEventListener('resize', adjustResourceImageHeight);
-
-//
 // Scheduler 
 const applyCategoryColor = (args: any, currentView: any) => {
 
@@ -2325,13 +2012,13 @@ function updateCardElement(selector: string, count: number,indexNumber:number): 
   }
 }
 function bindClickEvent(): void {
-  var anchorTags = document.querySelectorAll('body a');
+  let anchorTags: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('body a');
   if (anchorTags) {
-    for (var i = 0; i < anchorTags.length; i++) {
-      var currentAnchor = anchorTags[i];
+    for (let i = 0; i < anchorTags.length; i++) {
+      let currentAnchor = anchorTags[i];
       if (currentAnchor) {
         if (currentAnchor.textContent && currentAnchor.textContent.trim() === 'Claim your free account') {
-          var parentElement = currentAnchor.parentElement;
+          let parentElement: Element | null = currentAnchor.parentElement;
           if (parentElement) {
             parentElement.remove()
           }
@@ -2341,7 +2028,7 @@ function bindClickEvent(): void {
   }
   const imageContainer: HTMLElement | null = document.getElementById('image-container') as HTMLElement;
   if (imageContainer) {
-    const circularImages: NodeListOf<HTMLElement> = imageContainer.querySelectorAll('.circular-image1');
+    const circularImages: NodeListOf<HTMLElement> = imageContainer.querySelectorAll('.circular-image');
     circularImages.forEach((image: HTMLElement) => {
       image.addEventListener('click', (event: Event) => {
         const target = event.target as HTMLImageElement;
@@ -2377,10 +2064,10 @@ function bindTabClickEvent(): void {
   kanban.classList.add("show1")
   const setActiveTab = (activeTab: HTMLElement, backgroundClass: string): void => {
     const elements = [
-      document.getElementsByClassName("parent-kanban1")[0],
-      document.getElementsByClassName("parent-scheduler1")[0],
-      document.getElementsByClassName("parent-gantt1")[0],
-      document.getElementsByClassName("parent-grid1")[0]
+      document.getElementsByClassName("parent-kanban")[0],
+      document.getElementsByClassName("parent-scheduler")[0],
+      document.getElementsByClassName("parent-gantt")[0],
+      document.getElementsByClassName("parent-grid")[0]
     ];
     elements.forEach(element => {
       if (element) {
@@ -2395,39 +2082,36 @@ function bindTabClickEvent(): void {
         component.classList.remove("show1");
       }
     });
-    if (activeTab === document.getElementsByClassName("parent-kanban1")[0]) {
+    if (activeTab === document.getElementsByClassName("parent-kanban")[0]) {
       kanban?.classList.add("show1");
       kanbanObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-scheduler1")[0]) {
+    } else if (activeTab === document.getElementsByClassName("parent-scheduler")[0]) {
       scheduler?.classList.add("show1");
       scheduleObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-gantt1")[0]) {
+    } else if (activeTab === document.getElementsByClassName("parent-gantt")[0]) {
       gantt1?.classList.add("show1");
       setTimeout(() => {
         gantt.refresh();
       }, 0);
-    } else if (activeTab === document.getElementsByClassName("parent-grid1")[0]) {
+    } else if (activeTab === document.getElementsByClassName("parent-grid")[0]) {
       grid?.classList.add("show1");
       gridObj.refresh();
-      // setTimeout(() => {
-      //   gridObj.refresh();
-      // }, 0);
     }
   };
-  setActiveTab(document.getElementsByClassName("parent-kanban1")[0] as HTMLElement, "show1-background");
-  const parentElement = document.getElementsByClassName("centered-div1")[0] as HTMLElement;
+  setActiveTab(document.getElementsByClassName("parent-kanban")[0] as HTMLElement, "show1-background");
+  const parentElement = document.getElementsByClassName("centered-div")[0] as HTMLElement;
   parentElement?.childNodes.forEach(node => {
     if (node.nodeType === Node.ELEMENT_NODE) {
       const element = node as HTMLElement;
       element.addEventListener("click", (e: any) => {
-        if (e.target.classList.contains("navimage-kanban1") || e.target.classList.contains("parent-kanban1")) {
-          setActiveTab(document.getElementsByClassName("parent-kanban1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-scheduler1") || e.target.classList.contains("parent-scheduler1")) {
-          setActiveTab(document.getElementsByClassName("parent-scheduler1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-gantt1") || e.target.classList.contains("parent-gantt1")) {
-          setActiveTab(document.getElementsByClassName("parent-gantt1")[0] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-grid1") || e.target.classList.contains("parent-grid1")) {
-          setActiveTab(document.getElementsByClassName("parent-grid1")[0] as HTMLElement, "show1-background");
+        if (e.target.classList.contains("navimage-kanban") || e.target.classList.contains("parent-kanban")) {
+          setActiveTab(document.getElementsByClassName("parent-kanban")[0] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-scheduler") || e.target.classList.contains("parent-scheduler")) {
+          setActiveTab(document.getElementsByClassName("parent-scheduler")[0] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-gantt") || e.target.classList.contains("parent-gantt")) {
+          setActiveTab(document.getElementsByClassName("parent-gantt")[0] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-grid") || e.target.classList.contains("parent-grid")) {
+          setActiveTab(document.getElementsByClassName("parent-grid")[0] as HTMLElement, "show1-background");
         }
       });
     }
@@ -2443,10 +2127,10 @@ function bindEventListeners(): void {
   kanban.classList.add("show1");
   const setActiveTab = (activeTab: HTMLElement, backgroundClass: string): void => {
     const elements = [
-      document.getElementsByClassName("parent-kanban1")[1],
-      document.getElementsByClassName("parent-scheduler1")[1],
-      document.getElementsByClassName("parent-gantt1")[1],
-      document.getElementsByClassName("parent-grid1")[1]
+      document.getElementsByClassName("parent-kanban")[1],
+      document.getElementsByClassName("parent-scheduler")[1],
+      document.getElementsByClassName("parent-gantt")[1],
+      document.getElementsByClassName("parent-grid")[1]
     ];
     elements.forEach(element => {
       if (element) {
@@ -2461,22 +2145,22 @@ function bindEventListeners(): void {
         component.classList.remove("show1");
       }
     });
-    if (activeTab === document.getElementsByClassName("parent-kanban1")[1]) {
+    if (activeTab === document.getElementsByClassName("parent-kanban")[1]) {
       kanban?.classList.add("show1");
       scheduleObj.refresh();
       kanbanObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-scheduler1")[1]) {
+    } else if (activeTab === document.getElementsByClassName("parent-scheduler")[1]) {
       scheduler?.classList.add("show1");
       kanbanObj.refresh();
       scheduleObj.refresh();
-    } else if (activeTab === document.getElementsByClassName("parent-gantt1")[1]) {
+    } else if (activeTab === document.getElementsByClassName("parent-gantt")[1]) {
       gantt1?.classList.add("show1");
       scheduleObj.refresh();
       kanbanObj.refresh();
       setTimeout(() => {
         gantt.refresh();
       }, 0);
-    } else if (activeTab === document.getElementsByClassName("parent-grid1")[1]) {
+    } else if (activeTab === document.getElementsByClassName("parent-grid")[1]) {
       grid?.classList.add("show1");
       scheduleObj.refresh();
       kanbanObj.refresh();
@@ -2484,19 +2168,19 @@ function bindEventListeners(): void {
       gridObj.refresh();
     }
   };
-  const parentElement = document.getElementsByClassName("mobile-nav-bar1")[0] as HTMLElement;
+  const parentElement = document.getElementsByClassName("mobile-nav-bar")[0] as HTMLElement;
   parentElement?.childNodes.forEach(node => {
     if (node.nodeType === Node.ELEMENT_NODE) {
       const element = node as HTMLElement;
       element.addEventListener(clickOrTouchEvent, (e: any) => {
-        if (e.target.classList.contains("navimage-kanban1") || e.target.classList.contains("parent-kanban1")) {
-          setActiveTab(document.getElementsByClassName("parent-kanban1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-scheduler1") || e.target.classList.contains("parent-scheduler1")) {
-          setActiveTab(document.getElementsByClassName("parent-scheduler1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-gantt1") || e.target.classList.contains("parent-gantt1")) {
-          setActiveTab(document.getElementsByClassName("parent-gantt1")[1] as HTMLElement, "show1-background");
-        } else if (e.target.classList.contains("navimage-grid1") || e.target.classList.contains("parent-grid1")) {
-          setActiveTab(document.getElementsByClassName("parent-grid1")[1] as HTMLElement, "show1-background");
+        if (e.target.classList.contains("navimage-kanban") || e.target.classList.contains("parent-kanban")) {
+          setActiveTab(document.getElementsByClassName("parent-kanban")[1] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-scheduler") || e.target.classList.contains("parent-scheduler")) {
+          setActiveTab(document.getElementsByClassName("parent-scheduler")[1] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-gantt") || e.target.classList.contains("parent-gantt")) {
+          setActiveTab(document.getElementsByClassName("parent-gantt")[1] as HTMLElement, "show1-background");
+        } else if (e.target.classList.contains("navimage-grid") || e.target.classList.contains("parent-grid")) {
+          setActiveTab(document.getElementsByClassName("parent-grid")[1] as HTMLElement, "show1-background");
         }
       });
     }
@@ -2510,7 +2194,7 @@ window.addEventListener('resize', function() {
     document.getElementsByClassName('component-contain')[0].classList.add('add-overflow');
   }
   if (window.innerWidth >= 700) {
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar1');
+    const centeredDiv: HTMLDivElement | null = document.querySelector('.mobile-nav-bar');
     let storedClassName:any;
     if (centeredDiv) {
       const elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
@@ -2525,7 +2209,7 @@ window.addEventListener('resize', function() {
       }
     }
   } else {
-    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div1');
+    const centeredDiv: HTMLDivElement | null = document.querySelector('.centered-div');
     let storedClassName:any;
     if (centeredDiv) {
       const elements: NodeListOf<HTMLDivElement> = centeredDiv.querySelectorAll('div');
@@ -2540,10 +2224,6 @@ window.addEventListener('resize', function() {
         document.getElementsByClassName(storedClassName)[1].classList.add("show1-background");
       }
     }
-    // setTimeout(() => {
-    //   debugger
-    //   kanbanObj.refresh();
-    // }, 1000);
   }
 });
 window.addEventListener('load', function() {
@@ -2553,23 +2233,23 @@ window.addEventListener('load', function() {
     document.getElementsByClassName('component-contain')[0].classList.add('add-overflow');
   }
   if (window.innerWidth < 380) {
-    document.getElementsByClassName("parent-kanban1")[1].classList.add("show1-background")
+    document.getElementsByClassName("parent-kanban")[1].classList.add("show1-background")
   }
 });
 function bindScrollEvent(): void { 
-  var createContainer = document.querySelector('.create-container1');
+  let createContainer: Element | null = document.querySelector('.create-container');
   if (createContainer !== null) {
     createContainer.addEventListener('scroll', function (event) {
       if (event.currentTarget instanceof HTMLElement) {
         if (event.currentTarget.scrollTop > 110) {
-          var checkUdhaya = document.getElementsByClassName('check-udhaya')[0];
-          if (checkUdhaya instanceof HTMLElement) {
-            checkUdhaya.style.visibility = "hidden";
+          let datasourceFilter: Element | undefined = document.getElementsByClassName('datasource-filter-container')[0];
+          if (datasourceFilter instanceof HTMLElement) {
+            datasourceFilter.style.visibility = "hidden";
           }
         } else {
-          var checkUdhaya = document.getElementsByClassName('check-udhaya')[0];
-          if (checkUdhaya instanceof HTMLElement) {
-            checkUdhaya.style.visibility = "";
+          let datasourceFilter: HTMLElement = document.getElementsByClassName('datasource-filter-container')[0] as HTMLElement;
+          if (datasourceFilter instanceof HTMLElement) {
+            datasourceFilter.style.visibility = "";
           }
         }
       }
@@ -2577,27 +2257,19 @@ function bindScrollEvent(): void {
   }
 }
 window.home = () => {
-   renderDataSourceDropDown();
-   renderButton();
-   timerangecompo();
-  // renderVisalComponents();
-   renderGrid();
-   renderKanban();
-   renderGantt();
-   renderScheduler();
-  // adjustKanbanHeight();
-  // adjustSchedulerHeight();
-  // adjustGridHeight();
-  // adjustGanttHeight();
-  // adjustResourceImageHeight();
-  // adjustDropDownHeight();
+  renderDataSourceDropDown();
+  renderButton();
+  timerangecompo();
+  renderGrid();
+  renderKanban();
+  renderGantt();
+  renderScheduler();
   updateCardValue();
   bindClickEvent();
   bindTabClickEvent();
   bindEventListeners();
   bindScrollEvent();
 };
-
 function getResourceObject(resourceStr:any) {
   return editingResources.find(resource => resource.resourceName === resourceStr);
 }

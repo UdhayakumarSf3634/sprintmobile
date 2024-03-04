@@ -5,20 +5,20 @@ body, html {
     position: relative; /* Ensure relative positioning for absolute elements */
 }
 
-.create-container1 {
+.create-container {
     display: flex;
     height: 100vh;
     flex-direction: row; /* Set flex direction to row */
 }
 
-.nav-bar1 {
+.nav-bar {
     width: 80px;
     background-color: rgb(13, 148, 136);
     position: relative;
     height: 100vh; /* Set height to 100% of viewport height */
 }
 
-.nav-bar1 > div {
+.nav-bar > div {
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
@@ -26,7 +26,7 @@ body, html {
     justify-content: center;
     align-items: center;
 }
-.first-nav-div1 {
+.first-nav-div {
     position: absolute;
     top: 5px;
     width: 48px;
@@ -35,10 +35,7 @@ body, html {
     background-repeat: no-repeat;
     background-size: contain;
 }
-// .first-nav-div1:before {
-//     content: url('../images/Group\ 24.png');
-// }
-.last-nav-div1 {
+.last-nav-div {
     position: absolute;
     bottom: 5px;
     width: 48px;
@@ -48,10 +45,7 @@ body, html {
     background-repeat: no-repeat;
     background-size: contain;
 }
-// .last-nav-div1:before {
-//     content: url('../images/Rectangle\ 2626.png');
-// }
-.centered-div1 {
+.centered-div {
     position: absolute;
     top: 25%;
     bottom: 25%;
@@ -61,14 +55,14 @@ body, html {
     justify-content: space-evenly !important;
     align-items: center;
 }
-.parent-kanban1 {
+.parent-kanban {
     width: 45px;
     height: 45px;
     display: flex;
     justify-content: center; /* Horizontal alignment */
     align-items: center; /* Vertical alignment */
 }
-.navimage-kanban1 {
+.navimage-kanban {
     width: 22px;
     height: 22px;
     background-image: url('../images/Group\ 144.png');
@@ -76,14 +70,14 @@ body, html {
     background-position: center;
     background-size: cover;
 }
-.parent-scheduler1 {
+.parent-scheduler {
     width: 45px;
     height: 45px;
     display: flex;
     justify-content: center; /* Horizontal alignment */
     align-items: center; /* Vertical alignment */
 }
-.navimage-scheduler1 {
+.navimage-scheduler {
     width: 22px;
     height: 22px;
     background-image: url('../images/Group\ 142.png');
@@ -91,14 +85,14 @@ body, html {
     background-position: center;
     background-size: cover;
 }
-.parent-gantt1 {
+.parent-gantt {
     width: 45px;
     height: 45px;
     display: flex;
     justify-content: center; /* Horizontal alignment */
     align-items: center; /* Vertical alignment */
 }
-.navimage-gantt1 {
+.navimage-gantt {
     width: 22px;
     height: 22px;
     background-image: url('../images/Group\ 143.png');
@@ -106,14 +100,14 @@ body, html {
     background-position: center;
     background-size: contain;
 }
-.parent-grid1 {
+.parent-grid {
     width: 45px;
     height: 45px;
     display: flex;
     justify-content: center; /* Horizontal alignment */
     align-items: center; /* Vertical alignment */
 }
-.navimage-grid1 {
+.navimage-grid {
     width: 22px;
     height: 22px;
     background-image: url('../images/Group\ 123.png');
@@ -121,21 +115,21 @@ body, html {
     background-position: center;
     background-size: cover; 
 }
-.main-content1 {
+.main-content {
     flex: 1;
     padding: 20px;
     box-sizing: border-box;
     position: relative; /* Ensure position is relative for child elements */
 }
 
-.title-container1 {
+.title-container {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between; /* Align items in the title container */
     align-items: center; /* Center items vertically */
 }
 
-.title1 {
+.title {
     font-size: 25px;
     margin: 0; /* Remove the bottom margin */
     margin-right: auto;
@@ -143,7 +137,7 @@ body, html {
     font-weight: 600;
 }
 
-.button1 {
+.button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -152,7 +146,7 @@ body, html {
     background-image: url("../images/button.png");
 }
 
-.circle1 {
+.circle {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -162,7 +156,7 @@ body, html {
     background-size:contain;
 }
 
-.extra-circle1 {
+.extra-circle {
     width: 36px;
     height: 36px;
     background-image: url("../images/Group\ 24M.png");
@@ -170,7 +164,7 @@ body, html {
     background-repeat: no-repeat;
     margin-right: 10px;
 }
-.card-container1 {
+.card-container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -235,18 +229,18 @@ body, html {
     letter-spacing: 0em;
     text-align: left;
 }
-.dropdown-container1 {
+.dropdown-container {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between; /* Align dropdowns to the left and right */
     align-items: center; /* Center items vertically */
 }
 
-.custom-dropdown1:nth-child(2) {
+.custom-dropdown:nth-child(2) {
     margin-left: auto; /* Push the second dropdown to the right */
 }
 
-.custom-dropdown1 {
+.custom-dropdown {
     width: calc(33% - 10px); /* Set width of dropdowns */
     max-width: 200px; /* Set max-width for dropdowns */
 }
@@ -282,11 +276,6 @@ body, html {
     width: calc(90% - 10px);
     height: 30px;
 }
-
-.component-container1 {
-  //  max-height: 64vh; /* Set max-height to 70% of viewport height */
-  //  overflow-y: auto; /* Enable vertical scrolling if necessary */
-}
 .add-overflow {
     overflow-y: auto;
     height :64vh;
@@ -314,22 +303,14 @@ body, html {
     width: 90vw !important;
     //height: 45vh !important;
 }
-#component-render-grid {
-   // width: 90vw !important;
- //   height: 45vh !important;
-}
-#component-renderf {
-   // width: 90vw !important;
- //   height: 45vh !important;
-}
 
-.parent-kanban1:hover, .parent-scheduler1:hover, .parent-gantt1:hover, .parent-grid1:hover{
+.parent-kanban:hover, .parent-scheduler:hover, .parent-gantt:hover, .parent-grid:hover{
     border: 1px solid white;
 }
-.circular-image1:hover {
+.circular-image:hover {
     box-shadow: 0 0 10px rgba(13, 148, 136, 1);
 }
-.circular-image1 {
+.circular-image {
     border-radius: 50%;
 }
 .selected-image {
@@ -340,22 +321,19 @@ body, html {
 }
 /* Media query for mobile view */
 @media only screen and (max-width: 700px) {
-    .nav-bar1 {
+    .nav-bar {
         display: none; /* Hide the normal nav bar */
     }
     #component-renderf {
-         width: 90vw !important;
-      //   height: 45vh !important;
+        width: 90vw !important;
      }
      #component-render-gantt {
-         width: 90vw !important;
-         //height: 45vh !important;
+        width: 90vw !important;
      }
      #component-render-grid {
-         width: 90vw !important;
-      //   height: 45vh !important;
+        width: 90vw !important;
      }
-    .mobile-nav-bar1 {
+    .mobile-nav-bar {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -368,23 +346,23 @@ body, html {
         z-index: 1000;
     }
 
-    .create-container1 {
+    .create-container {
         position: relative;
     }
 
-    .button1 {
+    .button {
         display: none; /* Hide the button in mobile view */
     }
 
-    .circle1 {
+    .circle {
         display: block; /* Show the circle in mobile view */
     }
 
-    .extra-circle1 {
+    .extra-circle {
         display: block; /* Show the extra circle in mobile view */
     }
 
-    .dropdown-container1 {
+    .dropdown-container {
         flex-direction: column; /* Align dropdowns vertically in mobile view */
         justify-content: flex-start; /* Align dropdowns to the start in mobile view */
     }
@@ -398,7 +376,7 @@ body, html {
     .e-input-group.e-date-range-wrapper {
         width: 100% !important;
     }
-    .custom-dropdown1 {
+    .custom-dropdown {
         width: 100%; /* Set width to 100% in mobile view */
         max-width: none; /* Remove max-width in mobile view */
         margin-right: 0;
@@ -415,8 +393,7 @@ body, html {
     .custom-div1:before {
         content: url("../images/Group\ 1893.png");
     }
-    ///////////////////////////***********//////////////////
-    .title-container1 {
+    .title-container {
         position:sticky;
         top: 5px;
         z-index: 1;
@@ -438,28 +415,28 @@ body, html {
     #component-render-grid .e-gridheader {
         width: 300% !important;
     }
-    .parent-kanban1:hover, 
-    .parent-scheduler1:hover, 
-    .parent-gantt1:hover, 
-    .parent-grid1:hover {
+    .parent-kanban:hover, 
+    .parent-scheduler:hover, 
+    .parent-gantt:hover, 
+    .parent-grid:hover {
         border: none; /* Remove the border */
     }
-    .circular-image1:hover {
+    .circular-image:hover {
         box-shadow: none; /* Remove the box shadow */
     }
     
 }
 
 @media only screen and (min-width: 700px) {
-    .mobile-nav-bar1 {
+    .mobile-nav-bar {
         display: none; /* Hide the mobile nav bar in normal view */
     }
 
-    .circle1 {
+    .circle {
         display: none; /* Hide the circle in normal view */
     }
 
-    .extra-circle1 {
+    .extra-circle {
         display: none; /* Hide the extra circle in normal view */
     }
 }
@@ -503,11 +480,6 @@ body, html {
 @media only screen and (min-width: 1500px) {
     #component-render-gantt {
         width: 92vw !important;
-        //height: 45vh !important;
-    }
-    .component-container1 {
-        // max-height: 70vh; /* Set max-height to 70% of viewport height */
-        // overflow-y: auto; /* Enable vertical scrolling if necessary */
     }
     .add-overflow {
         overflow-y: auto;
@@ -522,11 +494,6 @@ body, html {
 @media only screen and (min-width: 1900px) {
     #component-render-gantt {
         width: 94vw !important;
-        //height: 45vh !important;
-    }
-    .component-container1 {
-        // max-height: 75vh; /* Set max-height to 70% of viewport height */
-        // overflow-y: auto; /* Enable vertical scrolling if necessary */
     }
     .add-overflow {
         overflow-y: auto;
@@ -538,9 +505,6 @@ body, html {
     }
 }
 @media (min-width: 1130px) and (max-width: 1170px) {
-    .component-container1 {
-       // max-height: 57vh;
-    }
     .add-overflow {
         overflow-y: auto;
         height :57vh;
@@ -552,9 +516,6 @@ body, html {
 }
 
 @media (min-width: 850px) and (max-width: 1130px) {
-    .component-container1 {
-      //  max-height: 54vh;
-    }
     .add-overflow {
         overflow-y: auto;
         height :54vh;
@@ -578,25 +539,22 @@ body, html {
     .counttodo {
         font-size: 30px;
     }
-    .main-content1{
+    .main-content{
         padding-top: 5px;
     }
-    .nav-bar1 {
+    .nav-bar {
         width: 65px;
     }
-    .first-nav-div1 {
+    .first-nav-div {
         width: 35px;
         height: 35px;
     }
-    .last-nav-div1 {
+    .last-nav-div {
         width: 35px;
         height: 35px;
     }
-    .title-container1 {
+    .title-container {
         margin-bottom: 5px;
-    }
-    .component-container1 {
-       // max-height: 54vh;
     }
     .add-overflow {
         overflow-y: auto;
@@ -606,15 +564,15 @@ body, html {
     #component-render-grid {
         height: 63% !important;
     }
-    .navimage-kanban1,.navimage-scheduler1,.navimage-gantt1,.navimage-grid1 {
+    .navimage-kanban,.navimage-scheduler,.navimage-gantt,.navimage-grid {
         width: 16px;
         height: 16px;
     }
-    .parent-kanban1,.parent-scheduler1,.parent-gantt1,.parent-grid1 {
+    .parent-kanban,.parent-scheduler,.parent-gantt,.parent-grid {
         width: 35px;
         height: 35px;
     }
-    .circular-image1 {
+    .circular-image {
         width: 30px !important;
         height: 30px !important;
     }
@@ -658,7 +616,7 @@ body, html {
     .mainimagetodo {
         width: 25%;
     }
-    .dropdown-container1 {
+    .dropdown-container {
         align-items: start;
     }
     .texttodo {
@@ -668,34 +626,31 @@ body, html {
     .counttodo {
         font-size: 25px;
     }
-    .main-content1{
+    .main-content{
         padding-top: 0px;
     }
-    .nav-bar1 {
+    .nav-bar {
         width: 50px;
     }
-    .first-nav-div1 {
+    .first-nav-div {
         width: 30px;
         height: 30px;
     }
-    .last-nav-div1 {
+    .last-nav-div {
         width: 30px;
         height: 30px;
     }
-    .title-container1 {
+    .title-container {
         margin-bottom: 0px;
     }
-    .title1 {
+    .title {
         font-size: 20px;
     }
-    .button1 {
+    .button {
         height: 20px;
         background-repeat: no-repeat;
         background-position: center; 
         background-size: cover;
-    }
-    .component-container1 {
-       // max-height: 60vh;
     }
     .add-overflow {
         overflow-y: auto;
@@ -705,21 +660,21 @@ body, html {
     #component-render-grid {
         height: 61% !important;
     }
-    .navimage-kanban1,
-    .navimage-scheduler1,
-    .navimage-gantt1,
-    .navimage-grid1 {
+    .navimage-kanban,
+    .navimage-scheduler,
+    .navimage-gantt,
+    .navimage-grid {
         width: 11px;
         height: 11px;
     }
-    .parent-kanban1,
-    .parent-scheduler1,
-    .parent-gantt1,
-    .parent-grid1 {
+    .parent-kanban,
+    .parent-scheduler,
+    .parent-gantt,
+    .parent-grid {
         width: 30px;
         height: 30px;
     }
-    .circular-image1 {
+    .circular-image {
         width: 25px !important;
         height: 25px !important;
     }
@@ -758,9 +713,6 @@ body, html {
 }
 
 /* Css From other Project */
-   /**/
-       /**/
-   /**/
 
 /* Kanban */
 .e-kanban .header-template-wrap {
